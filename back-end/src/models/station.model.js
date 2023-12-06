@@ -1,5 +1,5 @@
 import mongoose, { mongo } from "mongoose";
-import {Train} from "./train.model";
+import {Train} from "./train.model.js";
 
 const stationSchema = new mongoose.Schema({
     stationName: {
@@ -26,5 +26,8 @@ const stationSchema = new mongoose.Schema({
         }
     ],
 
-    
+    /*
+        driverAvailabilty: 
+    */
+
 }, {timestamps: true});

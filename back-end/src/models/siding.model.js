@@ -4,6 +4,7 @@ const expectedCoalSchema = new mongoose.Schema({
     expectedTime: {
         type: Date,
     },
+    
     expectedWeight: {
         type: Number,
         default: 0
@@ -14,7 +15,7 @@ const ExpectedCoal = mongoose.model("ExpectedCoal", expectedCoalSchema);
 
 const sidingSchema = new mongoose.Schema({
 
-    stationName: {
+    sidingName: {
         type: String,
         required: true,
         lowercase: true,
@@ -22,7 +23,7 @@ const sidingSchema = new mongoose.Schema({
         trim: true
     },
 
-    stationCode: {
+    sidingCode: {
         type: String,
         required: true,
         unique: true,
@@ -36,15 +37,16 @@ const sidingSchema = new mongoose.Schema({
         default: 0,
     },
 
-    trainAssigned: {
-        type: Boolean,
-        default: false
-    },
-
     expectedCoalData: {
         type: mongoose.Types.ObjectID,
         ref: "ExpectedCoal"
+    },
+
+    trainAssigned: {
+        type: Boolean,
+        default: false
     }
+
 
 }, {timestamps: true});
 
