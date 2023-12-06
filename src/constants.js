@@ -1,1 +1,1 @@
-export const DB_NAME_TEST = "railway-rakes-test"
+export const DB_NAME_TEST = "railway-rakes-test";
