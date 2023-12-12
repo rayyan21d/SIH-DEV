@@ -1,60 +1,51 @@
 import { useState } from 'react';
 
 const Form = () => {
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-  });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const data = new FormData(event.target);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission logic here
-    console.log('Form submitted with data:', formData);
-  };
-
+    fetch('/api/form-submit-url', {
+      method: 'POST',
+      body: data,
+    });
+    
+  }
+  
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        First Name:
-        <input
-          type="text"
-          name="firstName"
-          value={formData.firstName}
-          onChange={handleChange}
-        />
-      </label>
+
+    <>
+      <form onSubmit={handleSubmit} >
+      <select>
+        <option value="railway">Railway Admin</option>
+        <option value="mine">Mine Admin</option>
+      </select>
+
       <br />
+
       <label>
-        Last Name:
+        Username
         <input
           type="text"
           name="lastName"
-          value={formData.lastName}
-          onChange={handleChange}
+         
         />
       </label>
       <br />
+
       <label>
-        Email:
+        Password
         <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
+          type="password"
+          name="pass"
         />
       </label>
       <br />
-      <button type="submit">Submit</button>
+
+      <button type="submit"  >Submit</button>
     </form>
+    </>
   );
 };
 
