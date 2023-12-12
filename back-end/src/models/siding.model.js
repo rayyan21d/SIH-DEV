@@ -1,20 +1,13 @@
-import mongoose, { mongo } from "mongoose";
+import mongoose from "mongoose";
 
-const expectedCoalSchema = new mongoose.Schema({
-    expectedTime: {
-        type: Date,
-    },
-    
-    expectedWeight: {
-        type: Number,
-        default: 0
-    }
-}, {timestamps: true});
+
 
 const ExpectedCoal = mongoose.model("ExpectedCoal", expectedCoalSchema);
 
 const sidingSchema = new mongoose.Schema({
+    // zone, division
 
+    
     sidingName: {
         type: String,
         required: true,
@@ -32,22 +25,28 @@ const sidingSchema = new mongoose.Schema({
         trim: true
     },
 
-    coalCollected: {
-        type: Number,
-        default: 0,
+    coalToBeCollected: {
+
     },
 
-    expectedCoalData: {
-        type: mongoose.Types.ObjectID,
-        ref: "ExpectedCoal"
+    timeOfCollection: {
+        
     },
 
     trainAssigned: {
         type: Boolean,
         default: false
+        // and which train
+    },
+
+    lat: {
+
+    },
+
+    long: {
+
     }
-
-
+    
 }, {timestamps: true});
 
 export const Siding = mongoose.model("Siding", sidingSchema);

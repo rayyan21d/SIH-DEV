@@ -1,5 +1,5 @@
-import mongoose, { mongo } from "mongoose";
-import {Train} from "./train.model.js";
+import mongoose from "mongoose";
+import { Train } from "./train.model.js";
 
 const stationSchema = new mongoose.Schema({
     stationName: {
@@ -21,7 +21,7 @@ const stationSchema = new mongoose.Schema({
 
     trains: [
         {
-            type: mongoose.Types.ObjectId,
+            type: mongoose.Schema.Types.ObjectId,
             ref: "Train"
         }
     ],
@@ -31,3 +31,5 @@ const stationSchema = new mongoose.Schema({
     */
 
 }, {timestamps: true});
+
+export const Station = mongoose.model("Station", stationSchema);
