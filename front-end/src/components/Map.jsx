@@ -1,5 +1,6 @@
 
 import {useJsApiLoader, GoogleMap, Marker, DirectionsRenderer} from '@react-google-maps/api';
+import { useState } from 'react';
 
 
 const journey ={
@@ -14,14 +15,43 @@ const journey ={
 const Map = () => {
 
     const { isLoaded } = useJsApiLoader({
-        googleMapsApiKey: "AIzaSyAKNvINXosnYnjKponB3GzlRhwwWr7f254"
+        googleMapsApiKey: "AIzaSyAKNvINXosnYnjKponB3GzlRhwwWr7f254",
+        libraries: ['places']
         
     })
+
+    const [directionsResponse, setDirectionsResponse] = useState(null)
     
 
     if(!isLoaded) {
         return <div>Loading......</div>
     }
+
+  async function calculateRoute(){
+        if( journey.source === '' || journey.destination === '' ){
+            return
+
+        } // source or destination are empty
+
+        // eslint-disable-next-line no-undef
+        const directionsService = new google.maps.DirectionsService()
+        const results = await directionsService.route({
+            origin: journey.source,
+            destination: journey.destination,
+            // eslint-disable-next-line no-undef
+            travelMode: google.maps.TravelMode.TRANSIT
+        })
+
+        console.log(results)
+        setDirectionsResponse(results)
+        // results.routes[0].legs[0].duration.text
+
+
+    }
+
+    // function clearRoute(){
+
+    
 
    
     return (
@@ -81,10 +111,13 @@ const Map = () => {
         <Marker position={journey.source} />
         <Marker position={journey.destination} />
 
-    
+
+        {directionsResponse && <DirectionsRenderer directions={directionsResponse}/>}
+
        </GoogleMap >
 
-            <a>
+
+            <a onClick={calculateRoute}>
             TEXT
             </a>
 
