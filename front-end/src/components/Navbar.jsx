@@ -1,7 +1,7 @@
 const Navbar = () => {
   
     return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark" style={{display:'flex', justifyContent:"flex-end", padding:'10px'} }>
       
       <a className="navbar-brand" href="#">Home</a>
       <a className="navbar-brand" href="#">Profile</a>
