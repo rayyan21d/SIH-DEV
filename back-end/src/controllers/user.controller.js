@@ -1,18 +1,18 @@
 import { asyncHandler } from "../utils/asyncHandler.js";
-import { registerSiding } from "./siding.controller.js";
-import { registerStation } from "./station.controller.js";
+import { User } from "../models/user.model.js";
+
+const addUser = asyncHandler(async (userType, req, res) => {
+    
+    const {username, password} = req.body;
+
+    const userCreated = await User.create({
+        username: username.toUpperCase(),
+        userType: userType,
+        password
+    })
+
+    return userCreated;
+})
 
 
-
-const registerUser = asyncHandler(async (req, res) => {
-    const {userType} = req.body;
-    if(userType === "siding") {
-        await registerSiding(req,  res);
-    } else {
-        await registerStation(req, res);
-    }
-});
-
-
-
-export {registerUser};
+export { addUser };
