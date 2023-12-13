@@ -9,10 +9,10 @@ import SignIn from './components/SignIn.jsx'
 ReactDOM.createRoot(document.getElementById('root')).render(
 
   <>
-  <Navbar />
+  {/* <Navbar />
   <App />
   <Form />
-  <Map/ >
+  <Map/ > */}
   <SignIn />
 
   </>
