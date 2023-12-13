@@ -26,9 +26,33 @@ const stationSchema = new mongoose.Schema({
         }
     ],
 
-    /*
-        driverAvailabilty: 
-    */
+    zone: {
+        type: String,
+        required: true
+    },
+
+    division: {
+        type: String,
+        required: true
+    },
+
+    contactPersonName: {
+        type: String,
+    },
+
+    contactPersonContact: {
+        type: String,
+    },
+
+    latitude: {
+        type: String,
+        required: true
+    },
+
+    longitude: {
+        type: String,
+        required: true
+    }
 
 }, {timestamps: true});
 

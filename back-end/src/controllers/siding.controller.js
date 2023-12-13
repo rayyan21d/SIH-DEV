@@ -1,68 +1,79 @@
-import { asyncHandler } from "../utils/asyncHandler.js"
-import { ApiError, errorResponse } from "../utils/ApiError.js"
-import { Siding } from "../models/siding.model.js"
-
+import { asyncHandler } from "../utils/asyncHandler.js";
+import { ApiResponse } from "../utils/ApiResponse.js";
+import { ApiError } from "../utils/ApiError.js";
+import { Siding } from "../models/siding.model.js";
+import { User } from "../models/user.model.js";
 
 
 
 const registerSiding = asyncHandler(async (req, res) => {
-   // get data from front end
-   
-   const {username: sidingCode, sidingName, hashedPassword} = req.body;
-   console.log("siding is:", sidingCode, hashedPassword);
+    // get data from user
+    const {sidingCode, sidingName, password, zone, division, contactPersonName, contactPersonContact, latitude, longitude} = req.body;
+    console.log("sidingCode", sidingCode, "sidingName", sidingName, "password", password);
 
-   // Validate if all required data is sent
-
-    if([
-        sidingCode, sidingName, hashedPassword
-    ].some((field) => { 
-        return field?.trim() === "";
-    } 
-    )) {
-        throw new ApiError(400, "All fields not given")
-        
-    } else {
-        console.log("All fields given")
-    }
-
-   // check if an admin is making this request
-
-    
-
-
-
-   // check if siding already exist
-
-    const existingSiding = await Siding.findOne({sidingCode});
-
-    if(existingSiding) {
-        res.status(401).json({
-            message: "Siding already exists"
+    // Validate if all data is sent
+    if(
+        [
+            sidingCode,
+            sidingName,
+            password,
+            zone,
+            division,
+            contactPersonName,
+            contactPersonContact,
+            latitude,
+            longitude
+        ].some((field) => {
+            return field?.trim() === "";
         })
+    ) {
+        throw new ApiError(400, "All fields not given");
+    } else {
+        console.log("Got all feilds");
     }
     
-    // create siding object and enter in DB
+    // Check if station already exists
 
-    const sidingCreated = await Siding.create({
-        sidingCode: sidingCode.toUpperCase(),
-        sidingName,
-        hashedPassword
-    });
-
-   // remove password and refresh token from response?
-
-    if(await Siding.findById(sidingCreated._id)) {
-        res.status(200).json({
-            message: "Siding Added Successfully"
-        })
-    } else {
-        res.status(402).json({
-            message: "Siding Couldnt be "
-        })
+    const existedSiding = await Siding.findOne({ sidingCode });
+    const existedUser = await User.findOne({ username: sidingCode });
+    if(existedSiding) {
+        throw new ApiError(409, "Siding Already exists in Siding Table");
     }
 
-   // check if entry is successful in DB
-   // return response
+    if(existedUser) {
+        throw new ApiError(409, "Siding Already exists in Siding Table");
+    }
+    // Create entry in DB
+    const sidingCreated = await Siding.create(
+        {
+            sidingCode: sidingCode.toUpperCase(),
+            sidingName: sidingName.toLowerCase(),
+            password,
+            zone,
+            division,
+            contactPersonName,
+            contactPersonContact,
+            latitude,
+            longitude
+        }
+    )
+
+    const userCreated = await User.create(
+        {
+            username: sidingCode.toUpperCase(),
+            password,
+            userType: "siding"
+        }
+    )
+    
+
+    if(await Siding.findById(sidingCreated._id) && await User.findById(userCreated._id)) {
+        return res.status(201).json(
+            new ApiResponse(200, sidingCreated, "Siding Added Successfully")
+        )
+    }else {
+        throw new ApiError(401, "Problem While Adding Siding")
+    }
 });
 
-export {registerSiding};
+export { registerSiding };

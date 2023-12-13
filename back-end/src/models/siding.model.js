@@ -2,12 +2,8 @@ import mongoose from "mongoose";
 
 
 
-const ExpectedCoal = mongoose.model("ExpectedCoal", expectedCoalSchema);
 
 const sidingSchema = new mongoose.Schema({
-    // zone, division
-
-    
     sidingName: {
         type: String,
         required: true,
@@ -25,26 +21,32 @@ const sidingSchema = new mongoose.Schema({
         trim: true
     },
 
-    coalToBeCollected: {
-
+    zone: {
+        type: String,
+        required: true
     },
 
-    timeOfCollection: {
-        
+    division: {
+        type: String,
+        required: true
     },
 
-    trainAssigned: {
-        type: Boolean,
-        default: false
-        // and which train
+    contactPersonName: {
+        type: String,
     },
 
-    lat: {
-
+    contactPersonContact: {
+        type: String,
     },
 
-    long: {
+    latitude: {
+        type: String,
+        required: true
+    },
 
+    longitude: {
+        type: String,
+        required: true
     }
     
 }, {timestamps: true});

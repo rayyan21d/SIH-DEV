@@ -1,62 +1,76 @@
-import { asyncHandler } from "../utils/asyncHandler.js"
-
+import { asyncHandler } from "../utils/asyncHandler.js";
+import { ApiError } from "../utils/ApiError.js";
+import { ApiResponse } from "../utils/ApiResponse.js";
+import { Station } from "../models/station.model.js";
+import { User } from "../models/user.model.js";
 const registerStation = asyncHandler(async (req, res) => {
-    // get data from front end
-   
-    const {username: stationCode, stayionName, hashedPassword} = req.body;
-    console.log("Station is:", stationCode, hashedPassword);
- 
-    // Validate if all required data is sent
- 
-     if([
-         stationCode, stationName, hashedPassword
-     ].some((field) => { 
-         return field?.trim() === "";
-     } 
-     )) {
-         throw new ApiError(400, "All fields not given")
-         
-     } else {
-         console.log("All fields given")
-     }
- 
-    // check if an admin is making this request
- 
- 
-    // check if station already exist
- 
-     const existingStation = await Station.findOne({stationCode});
- 
-     if(existingStation) {
-         res.status(401).json({
-             message: "Station already exists"
-         })
-     }
-     
-     // create siding object and enter in DB
- 
-     const stationCreated = await Station.create({
-         stationCode: stationCode.toUpperCase(),
-         stationName,
-         hashedPassword
-     });
- 
-    // remove password and refresh token from response?
- 
-     if(await Station.findById(stationCreated._id)) {
-         res.status(200).json({
-             message: "Station Added Successfully"
-         })
-     } else {
-         res.status(402).json({
-             message: "Station Couldnt be "
-         })
-     }
+    // get data from user
+    const {stationCode, stationName, password, zone, division, contactPersonName, contactPersonContact, latitude, longitude} = req.body;
+    console.log("stationCode", stationCode, "stationName", stationName, "password", password);
 
-     // check if entry is successful in DB
-     // return response
- 
-})
+    // Validate if all data is sent
+    if(
+        [
+            stationCode,
+            stationName,
+            password,
+            zone,
+            division,
+            contactPersonName,
+            contactPersonContact,
+            latitude,
+            longitude
+        ].some((field) => {
+            return field?.trim() === "";
+        })
+    ) {
+        throw new ApiError(400, "All fields not given");
+    } 
+    
+    // Check if station already exists
+
+    const existedStation = await Station.findOne({ stationCode });
+    const existedUser = await User.findOne({ username: stationCode });
+    if(existedStation) {
+        throw new ApiError(409, "Station Already exists in Station Table");
+
+    }
+    if(existedUser) {
+        throw new ApiError(409, "Station Already exists in Station Table");
+    }
+    // Create entry in DB
+    const stationCreated = await Station.create(
+        {
+            stationCode: stationCode.toUpperCase(),
+            stationName: stationName.toLowerCase(),
+            password,
+            zone,
+            division,
+            contactPersonName,
+            contactPersonContact,
+            latitude,
+            longitude
+        }
+    )
+
+    const userCreated = await User.create(
+        {
+            username: stationCode.toUpperCase(),
+            password,
+            userType: "station"
+        }
+    )
+
+    if(await Station.findById(stationCreated._id) && await User.findById(userCreated._id)) {
+        res.status(200).json({
+            message: "Station Added Successfully"
+        })
+    }else {
+        res.status(400).json({
+            message: "Station Couldnt be added"
+        })
+    }
+});
 
 
 export { registerStation };

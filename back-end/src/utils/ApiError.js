@@ -13,10 +13,6 @@ class ApiError extends Error {
     }
 }
 
-const errorResponse = (req, res, err) => {
-    res.status(err.statusCode).json({
-        message: err.message
-    })
-}
 
-export {ApiError, errorResponse};
+
+export {ApiError};
