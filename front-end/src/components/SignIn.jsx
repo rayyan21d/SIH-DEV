@@ -40,10 +40,12 @@ export default function SignIn() {
 
   const handleChange = (event) => {
     setUserType(event.target.value);
+    console.log(event.target.value)
   };
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    console.log(data)
     console.log({
       usertype:data.get('usertype'),
       email: data.get('email'),
@@ -72,12 +74,13 @@ export default function SignIn() {
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <Box sx={{ minWidth: 120 }}>
               <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">User Type</InputLabel>
+                <InputLabel id="demo-simple-select-label" >User Type</InputLabel>
                 <Select
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
                   value={usertype}
                   label="usertype"
+                  name='usertype'
                   onChange={handleChange}
                 >
                   <MenuItem value={'admin'}>Admin</MenuItem>
@@ -95,6 +98,7 @@ export default function SignIn() {
               name="email"
               autoComplete="email"
               autoFocus
+              
             />
             <TextField
               margin="normal"
@@ -105,6 +109,7 @@ export default function SignIn() {
               type="password"
               id="password"
               autoComplete="current-password"
+              
             />
             <Button
               type="submit"
