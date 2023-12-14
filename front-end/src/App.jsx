@@ -7,6 +7,7 @@ import Station from "./pages/station/Station"
 import Admin from "./pages/admin/Admin"
 import Siding from "./pages/siding/Siding"
 
+
 function App() {
 
   return (
@@ -38,7 +39,6 @@ function App() {
 
 
 
-
       </ul>
 
 
@@ -56,7 +56,6 @@ function App() {
       <Route path="/admin" element={<Admin />}/>
       <Route path="/station" element={<Station />}/>
       <Route path="/siding" element={<Siding />}/>
-
 
     </Routes>
 
