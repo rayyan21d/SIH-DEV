@@ -36,22 +36,39 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function SignIn() {
-  const [usertype, setUserType] = React.useState('');
+  const [userType, setuserType] = React.useState('');
 
   const handleChange = (event) => {
-    setUserType(event.target.value);
+    setuserType(event.target.value);
     console.log(event.target.value)
   };
-  const handleSubmit = (event) => {
+
+  const handleSubmit = async (event) => {
+
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log(data)
-    console.log({
-      usertype:data.get('usertype'),
-      email: data.get('email'),
-      password: data.get('password'),
+    const load = {
+      username: data.get("username"),
+      userType: data.get("userType"),
+      password: data.get("password")
+    }
+    console.log(load);
+    const resp = await fetch("http://localhost:8000/api/login", {
+      
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      
+      body: JSON.stringify(load)
+      
     });
+
+    const resData = await resp.json()
+    console.log(resData)
   };
+
+  //save this jwt token from reesponse into cookies either using axios or document.cookies....
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -78,10 +95,11 @@ export default function SignIn() {
                 <Select
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
-                  value={usertype}
-                  label="usertype"
-                  name='usertype'
+                  value={userType}
+                  label="userType"
+                  name='userType'
                   onChange={handleChange}
+                  required
                 >
                   <MenuItem value={'admin'}>Admin</MenuItem>
                   <MenuItem value={'station'}>Station Manager</MenuItem>
@@ -89,17 +107,19 @@ export default function SignIn() {
                 </Select>
               </FormControl>
             </Box>
+
             <TextField
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
+              id="username"
+              label="Username"
+              name="username"
+              
               autoFocus
               
             />
+
             <TextField
               margin="normal"
               required
@@ -111,6 +131,7 @@ export default function SignIn() {
               autoComplete="current-password"
               
             />
+
             <Button
               type="submit"
               fullWidth
@@ -121,9 +142,12 @@ export default function SignIn() {
             </Button>
 
           </Box>
+
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
     </ThemeProvider>
-  );
+  )
+
+
 }

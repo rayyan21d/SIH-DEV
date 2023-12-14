@@ -8,9 +8,7 @@ const Navbar = () => {
       <a className="navbar-brand" href="#">One</a>
       <a className="navbar-brand" href="#">Two</a>
 
-      
     </nav>
-
   )
 }
 
