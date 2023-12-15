@@ -1,32 +1,77 @@
 import React from 'react';
-import { Route, Routes} from 'react-router-dom';
+import {useLocation, Route, Routes} from 'react-router-dom';
 import Admin from './../admin/Admin';
 // import StationDashboard from './Station/StationDashboard';
 // import DestinationDashboard from './Destination/DestinationDashboard';
-import Home from './../Home'
+
+import ManageSiding from '../admin/ManageSiding';
+import ManageStation from '../admin/ManageStation';
+
+import Siding from '../siding/Siding';
+import MakeRequest from '../siding/MakeRequest'
+import CurrentRequest from '../siding/CurrentRequest'
+import PastRequest from '../siding/PastRequest'
+
+
+import Station from '../station/Station'
+import TrainsOwned from '../station/TrainsOwned'
+import TrainsInStation from '../station/TrainsInStation'
+import StationHistory from '../station/StationHistory'
+
+
+
 function Dashboard() {
-  const userType = 'admin'
+
+  // const location = useLocation();
+  // const { userType } = location.state;
+  // Save this here permanantly somehow?? A jwt token, ek cookie, and ek variable
+
+  const userType = localStorage.getItem('userType');
+
 
   switch (userType) {
     case 'admin':
       return(
         <Routes>
+
           <Route path="/" element={ <Admin />} />
-          <Route path="/manage-siding" element={ <Home />} />
-          <Route path="/manage-station" element={ <Home />} />
+          <Route path="/manage-siding" element={ <ManageSiding />} >
+          </Route>
+
+          <Route path="/manage-station" element={ <ManageStation/>} />
         </Routes>
         
       );
-  //   case 'station':
-  //     return <StationDashboard />;
-  //   case 'siding':
-  //     return <DestinationDashboard />;
-  //   default:
-  //     return <Redirect to="/signin" />;
-  // }
+    case 'siding':
+      return(
+        <Routes>
 
+          <Route path="/" element={ <Siding />} />
+          <Route path="/make-request" element={ <MakeRequest />} />
+          <Route path="/current-requests" element={ <CurrentRequest/>} />
+          <Route path="/past-requests" element={ <PastRequest/>} />
+
+        </Routes>
+        
+      );
+    case 'station':
+      return(
+        <Routes>
+
+          <Route path="/" element={ < Station />} />
+          <Route path="/trains-owned" element={ < TrainsOwned/>} />
+          <Route path="/trains-in-station" element={ < TrainsInStation />} />
+          <Route path="/station-history" element={ < StationHistory />} />
+
+        </Routes>
+        
+      );
+    default:
+      return <Redirect to="/" />;
   }
+
 }
+
 
 export default Dashboard;
 
@@ -43,3 +88,31 @@ export default Dashboard;
 
 // <Redirect>: This component is used to redirect from one URL to another. When a Redirect component is rendered, it changes the current URL and renders the Route that matches the new URL.
 // In this example, the URL is immediately changed to '/about' and the About component is rendered (assuming you have a Route for '/about').
+
+
+
+
+
+
+
+
+
+
+
+
+// If you want to persist the userType across different pages and even after the user refreshes the page, you have a few options:
+
+// Local Storage: You can save the userType in the local storage. The local storage data persists even after the page is refreshed. However, it's not secure and should not be used to store sensitive information.
+// And then retrieve it with:
+
+// Session Storage: Similar to local storage, but the data is cleared when the page session ends.
+
+// Cookies: You can save the userType in a cookie. Cookies can be secure and can also persist after the page is refreshed.
+
+// JWT Token: If the userType is part of the user's authentication data, it might be included in a JWT token. You would save the JWT token in a cookie or in the local storage and decode it to get the userType.
+
+// State Management Libraries: Libraries like Redux or the Context API can be used to manage global state. However, they don't persist state after the page is refreshed.
+
+// Server-side: If the userType is part of the user's data, you might want to consider storing it on the server-side and retrieving it when needed.
+
+// Choose the option that best fits your needs. If userType is sensitive data, you should use a secure method like JWT tokens or secure cookies. If it's not sensitive, local storage or session storage might be sufficient.

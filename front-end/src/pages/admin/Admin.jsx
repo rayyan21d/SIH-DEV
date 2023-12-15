@@ -17,12 +17,16 @@ import OrderList from './components/OrderList';
 import Header from './components/Header';
 
 export default function Admin() {
+
+
   return (
     <CssVarsProvider disableTransitionOnChange>
       <CssBaseline />
       <Box sx={{ display: 'flex', minHeight: '100dvh' }}>
+
         <Header />
         <Sidebar />
+
         <Box
           component="main"
           className="MainContent"
@@ -42,6 +46,7 @@ export default function Admin() {
             gap: 1,
           }}
         >
+
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <Breadcrumbs
               size="sm"
@@ -52,7 +57,7 @@ export default function Admin() {
               <Link
                 underline="none"
                 color="neutral"
-                href="#some-link"
+                href="#dashboard"
                 aria-label="Home"
               >
                 <HomeRoundedIcon />
@@ -71,6 +76,9 @@ export default function Admin() {
               </Typography>
             </Breadcrumbs>
           </Box>
+
+
+          {/** Main Content of the Admin Page **/}
           
           <Box
             sx={{
@@ -84,19 +92,16 @@ export default function Admin() {
             }}
           >
             <Typography level="h2" component="h1">
-              Orders
+             Welcome to your Dashboard!
             </Typography>
-            <Button
-              color="primary"
-              startDecorator={<DownloadRoundedIcon />}
-              size="sm"
-            >
-              Download PDF
-            </Button>
+
           </Box>
-          <OrderTable />
-          <OrderList />
+
+
         </Box>
+
+
+
       </Box>
     </CssVarsProvider>
   );

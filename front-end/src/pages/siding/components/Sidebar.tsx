@@ -34,7 +34,7 @@ import ColorSchemeToggle from "./ColorSchemeToggle";
 import { closeSidebar } from "../utils";
 
 import SignIn from "./../../shared/SignIn";
-import { Route, useNavigate, Link } from "react-router-dom";
+import { Route, useNavigate } from "react-router-dom";
 
 function Toggler({
   defaultExpanded = false,
@@ -134,7 +134,7 @@ export default function Sidebar() {
         <IconButton variant="soft" color="primary" size="sm">
           <BrightnessAutoRoundedIcon />
         </IconButton>
-        <Typography level="title-lg">Railway Rakes</Typography>
+        <Typography level="title-lg">Acme Co.</Typography>
         <ColorSchemeToggle sx={{ ml: "auto" }} />
       </Box>
 
@@ -161,14 +161,12 @@ export default function Sidebar() {
           }}
         >
           <ListItem>
-            <Link to="/dashboard">
-              <ListItemButton>
-                <HomeRoundedIcon />
-                <ListItemContent>
-                  <Typography level="title-sm">Home</Typography>
-                </ListItemContent>
-              </ListItemButton>
-            </Link>
+            <ListItemButton>
+              <HomeRoundedIcon />
+              <ListItemContent>
+                <Typography level="title-sm">Home</Typography>
+              </ListItemContent>
+            </ListItemButton>
           </ListItem>
 
           <ListItem nested>
@@ -186,21 +184,36 @@ export default function Sidebar() {
               )}
             >
               <List sx={{ gap: 0.5 }}>
-                <Link to="/dashboard/manage-siding">
-                  <ListItem sx={{ mt: 0.5 }}>
-                    <ListItemButton role="menuitem">
-                      Manage Sidings
-                    </ListItemButton>
-                  </ListItem>
-                </Link>
+                <ListItem sx={{ mt: 0.5 }}>
+                  <ListItemButton
+                    role="menuitem"
+                    component="a"
+                    href="/dashboard/manage-siding"
+                    onClick={handleDashboardClick}
+                  >
+                    Current Requests
+                  </ListItemButton>
+                </ListItem>
 
-                <Link to="/dashboard/manage-station">
-                  <ListItem sx={{ mt: 0.5 }}>
-                    <ListItemButton role="menuitem">
-                      Manage Stations
-                    </ListItemButton>
-                  </ListItem>
-                </Link>
+                <ListItem>
+                  <ListItemButton
+                    role="menuitem"
+                    component="a"
+                    href="/dashboard/manage-station"
+                  >
+                    Make Request
+                  </ListItemButton>
+                </ListItem>
+
+                <ListItem>
+                  <ListItemButton
+                    role="menuitem"
+                    component="a"
+                    href="/dashboard/manage-station"
+                  >
+                    Past Request
+                  </ListItemButton>
+                </ListItem>
               </List>
             </Toggler>
           </ListItem>

@@ -62,8 +62,10 @@ export default function SignIn() {
     }
     console.log(load);
 
-
-    navigate('/dashboard', {replace:true});
+    localStorage.setItem('userType', load.userType);
+    if (!load.username || !load.password) return;
+    
+    navigate('/dashboard', {replace:true,  state: {userType: load.userType} } );
     //     try {
     //   const resp = await fetch("http://localhost:8000/api/login", {
       

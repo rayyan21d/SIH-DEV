@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {useState} from 'react';
 import { CssVarsProvider } from '@mui/joy/styles';
 import CssBaseline from '@mui/joy/CssBaseline';
 import Box from '@mui/joy/Box';
@@ -16,8 +16,40 @@ import OrderTable from './components/OrderTable';
 import OrderList from './components/OrderList';
 import Header from './components/Header';
 
-export default function Siding() {
+import AddressForm from '../checkout/AddressForm';
+
+export default function ManageSiding() {
+
+  const [showForm, setShowForm] = useState(false);
+
+
+
+  function handleSubmit(event){
+
+    
+    setShowForm(!showForm)
+
+    
+
+    // if(event.id=='update'){
+
+    // }
+
+    // if(event.id=='delete'){
+
+
+    // }
+
+
+  }
+
+
+
+
   return (
+
+    <>
+
     <CssVarsProvider disableTransitionOnChange>
       <CssBaseline />
       <Box sx={{ display: 'flex', minHeight: '100dvh' }}>
@@ -44,6 +76,8 @@ export default function Siding() {
             gap: 1,
           }}
         >
+        {/* The upper nav section */}
+        
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <Breadcrumbs
               size="sm"
@@ -69,11 +103,12 @@ export default function Siding() {
                 Dashboard
               </Link>
               <Typography color="primary" fontWeight={500} fontSize={12}>
-                Orders
+                Manage Sidings
               </Typography>
             </Breadcrumbs>
           </Box>
           
+          {/* Manage Siding Heading */}
           <Box
             sx={{
               display: 'flex',
@@ -86,18 +121,81 @@ export default function Siding() {
             }}
           >
             <Typography level="h2" component="h1">
-             Welcome to your Dashboard!
+              Manage Sidings
             </Typography>
+
+
+           <Box
+           sx={{display:'flex',
+           justifyContent:'space-between', gap:1
+           }}
+           >
+             <Button
+              color="primary"
+              size="sm"
+              id='add'
+              onClick={handleSubmit}
+
+            >
+              Add Siding
+            </Button>
+
+
+              <Button
+              color="primary"
+              id='update'
+              onClick={handleSubmit}
+
+              size="sm"
+
+            >
+              Update Siding
+            </Button>
+
+              <Button
+              color="primary"
+              size="sm"
+              id='delete'
+              onClick={handleSubmit}
+
+            >
+              Delete Siding
+            </Button>
+
+           </Box>
+
+
+
 
           </Box>
 
+          {/* The main content of the page */}
 
-
-
+          {!showForm && <OrderTable />}
+         
+          {showForm && "FORM"}
+          
+          
+        
+          {/* <OrderList /> */}
 
 
         </Box>
+
+          
+
       </Box>
+
+
+      
+
+
     </CssVarsProvider>
+
+     {showForm && <AddressForm />}
+
+    </>
+
+
   );
 }

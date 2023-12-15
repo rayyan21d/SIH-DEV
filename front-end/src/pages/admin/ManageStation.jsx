@@ -16,9 +16,10 @@ import OrderTable from './components/OrderTable';
 import OrderList from './components/OrderList';
 import Header from './components/Header';
 
-export default function Siding() {
+export default function ManageStation() {
   return (
     <CssVarsProvider disableTransitionOnChange>
+      
       <CssBaseline />
       <Box sx={{ display: 'flex', minHeight: '100dvh' }}>
 
@@ -69,7 +70,7 @@ export default function Siding() {
                 Dashboard
               </Link>
               <Typography color="primary" fontWeight={500} fontSize={12}>
-                Orders
+                Manage Stations
               </Typography>
             </Breadcrumbs>
           </Box>
@@ -86,11 +87,21 @@ export default function Siding() {
             }}
           >
             <Typography level="h2" component="h1">
-             Welcome to your Dashboard!
+              Manage Stations
             </Typography>
-
+            <Button
+              color="primary"
+              startDecorator={<DownloadRoundedIcon />}
+              size="sm"
+            >
+              Download PDF
+            </Button>
           </Box>
 
+          <OrderTable />
+
+          
+          <OrderList />
 
 
 
@@ -99,5 +110,11 @@ export default function Siding() {
         </Box>
       </Box>
     </CssVarsProvider>
+
+
+
+
+
+
   );
 }
