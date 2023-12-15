@@ -1,12 +1,3 @@
-// import React from 'react'
-
-// function Admin() {
-//   return (
-//     <div>Admin</div>
-//   )
-// }
-
-// export default Admin
 import * as React from 'react';
 import { CssVarsProvider } from '@mui/joy/styles';
 import CssBaseline from '@mui/joy/CssBaseline';
@@ -24,9 +15,8 @@ import Sidebar from './components/Sidebar';
 import OrderTable from './components/OrderTable';
 import OrderList from './components/OrderList';
 import Header from './components/Header';
-// import MyProfile from './components/MyProfile';
 
-export default function JoyOrderDashboardTemplate() {
+export default function Admin() {
   return (
     <CssVarsProvider disableTransitionOnChange>
       <CssBaseline />
@@ -81,6 +71,7 @@ export default function JoyOrderDashboardTemplate() {
               </Typography>
             </Breadcrumbs>
           </Box>
+          
           <Box
             sx={{
               display: 'flex',
@@ -105,27 +96,7 @@ export default function JoyOrderDashboardTemplate() {
           </Box>
           <OrderTable />
           <OrderList />
-          
-          
         </Box>
-        {/* new code  */}
-        {/* <Box
-          component="main"
-          className="MainContent"
-          sx={{
-            pt: { xs: 'calc(12px + var(--Header-height))', md: 3 },
-            pb: { xs: 2, sm: 2, md: 3 },
-            flex: 1,
-            display: 'flex',
-            flexDirection: 'column',
-            minWidth: 0,
-            height: '100dvh',
-            gap: 1,
-            overflow: 'auto',
-          }}
-        >
-          <MyProfile />
-        </Box> */}
       </Box>
     </CssVarsProvider>
   );

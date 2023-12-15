@@ -18,6 +18,11 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
+import {useNavigate} from 'react-router-dom'
+
+
+
+
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -36,7 +41,10 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function SignIn() {
+
   const [userType, setuserType] = React.useState('');
+  const navigate = useNavigate();
+  // const history = useHistory();
 
   const handleChange = (event) => {
     setuserType(event.target.value);
@@ -53,19 +61,54 @@ export default function SignIn() {
       password: data.get("password")
     }
     console.log(load);
-    const resp = await fetch("http://localhost:8000/api/login", {
-      
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(load),
-      credentials:'include'
-      
-    });
 
-    const resData = await resp.json()
-    console.log(resData)
+
+    navigate('/dashboard', {replace:true});
+    //     try {
+    //   const resp = await fetch("http://localhost:8000/api/login", {
+      
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json"
+    //     },
+    //     body: JSON.stringify(load),
+    //     credentials:'include'
+      
+    //   })
+
+    //     if (!resp.ok) {
+    //     // If the server returns an HTTP status code other than 2xx,
+    //     // handle it based on the status code:
+    //     switch (resp.status) {
+  //       case 400: // Bad Request
+  //         // Handle 400 error
+  //         break;
+  //       case 401: // Unauthorized
+  //         // Handle 401 error
+  //         break;
+  //       // Add more cases as needed
+  //       default:
+  //         // Handle other errors
+    //     }
+    //     return;
+    //   }
+
+    //   const resData = await resp.json()
+    //   console.log(resData)
+
+    //   // Check if a cookie is set
+    //   if (document.cookie) {
+    //     // If a cookie is set, navigate to the dashboard
+    //     navigate('/dashboard');
+    //      // history.push({'/dashboard', state:{usertype: resData.userType}}); }
+    //   } else {
+    //     // If a cookie is not set, handle it
+    //   }
+    // } catch (err) {
+    //   // If the fetch fails (e.g., due to network issues), handle it
+    //   console.log(err);
+    // }
+
   };
 
   //save this jwt token from reesponse into cookies either using axios or document.cookies....

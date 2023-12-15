@@ -1,18 +1,14 @@
 
-import{Route, Routes, Link} from "react-router-dom"
+import{ Route, Routes,} from "react-router-dom"
 
-import Home from "./pages/Home"
-import SignIn from "./pages/signIn/SignIn"
-import Station from "./pages/station/Station"
-import Admin from "./pages/admin/Admin"
-import Siding from "./pages/siding/Siding"
-import NotFound from "./pages/NotFound"
+import SignIn from "./pages/shared/SignIn.jsx"
+import Dashboard from "./pages/shared/Dashboard.jsx"
 function App() {
 
   return (
 
     <>
-    <nav>
+    {/* <nav>
 
       <ul>
         <li>
@@ -42,11 +38,20 @@ function App() {
       </ul>
 
 
-    </nav>
+    </nav> */}
+
+
+      
+      <Routes>
+    
+        <Route exact path="/" Component={SignIn} />
+        <Route path="/dashboard/*" Component={Dashboard}/>
+
+      </Routes>
 
 
 
-    <Routes>
+      {/* <Routes>
 
   
       <Route path="/" element={<Home/>} />
@@ -65,9 +70,8 @@ function App() {
       
       <Route path="*" element={<NotFound />} />
 
-    </Routes>
+    </Routes> */}
 
-    
     </>
     
   )

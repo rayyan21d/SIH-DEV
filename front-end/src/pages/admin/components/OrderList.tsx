@@ -1,34 +1,211 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import * as React from 'react';
-import AspectRatio, { AspectRatioProps } from '@mui/joy/AspectRatio';
+import { ColorPaletteProp } from '@mui/joy/styles';
+import Box from '@mui/joy/Box';
+import Avatar from '@mui/joy/Avatar';
+import Chip from '@mui/joy/Chip';
+import Link from '@mui/joy/Link';
+import Divider from '@mui/joy/Divider';
+import IconButton from '@mui/joy/IconButton';
+import Typography from '@mui/joy/Typography';
+import List from '@mui/joy/List';
+import ListItem from '@mui/joy/ListItem';
+import ListItemContent from '@mui/joy/ListItemContent';
+import ListItemDecorator from '@mui/joy/ListItemDecorator';
+import ListDivider from '@mui/joy/ListDivider';
+import Menu from '@mui/joy/Menu';
+import MenuButton from '@mui/joy/MenuButton';
+import MenuItem from '@mui/joy/MenuItem';
+import Dropdown from '@mui/joy/Dropdown';
 
-export default function MuiLogo(props: AspectRatioProps) {
-  const { sx, ...other } = props;
+import MoreHorizRoundedIcon from '@mui/icons-material/MoreHorizRounded';
+import CheckRoundedIcon from '@mui/icons-material/CheckRounded';
+import BlockIcon from '@mui/icons-material/Block';
+import AutorenewRoundedIcon from '@mui/icons-material/AutorenewRounded';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
+
+const listItems = [
+  {
+    id: 'INV-1234',
+    date: 'Feb 3, 2023',
+    status: 'Refunded',
+    customer: {
+      initial: 'O',
+      name: 'Olivia Ryhe',
+      email: 'olivia@email.com',
+    },
+  },
+  {
+    id: 'INV-1233',
+    date: 'Feb 3, 2023',
+    status: 'Paid',
+    customer: {
+      initial: 'S',
+      name: 'Steve Hampton',
+      email: 'steve.hamp@email.com',
+    },
+  },
+  {
+    id: 'INV-1232',
+    date: 'Feb 3, 2023',
+    status: 'Refunded',
+    customer: {
+      initial: 'C',
+      name: 'Ciaran Murray',
+      email: 'ciaran.murray@email.com',
+    },
+  },
+  {
+    id: 'INV-1231',
+    date: 'Feb 3, 2023',
+    status: 'Refunded',
+    customer: {
+      initial: 'M',
+      name: 'Maria Macdonald',
+      email: 'maria.mc@email.com',
+    },
+  },
+  {
+    id: 'INV-1230',
+    date: 'Feb 3, 2023',
+    status: 'Cancelled',
+    customer: {
+      initial: 'C',
+      name: 'Charles Fulton',
+      email: 'fulton@email.com',
+    },
+  },
+  {
+    id: 'INV-1229',
+    date: 'Feb 3, 2023',
+    status: 'Cancelled',
+    customer: {
+      initial: 'J',
+      name: 'Jay Hooper',
+      email: 'hooper@email.com',
+    },
+  },
+];
+
+function RowMenu() {
   return (
-    <AspectRatio
-      ratio="1"
-      variant="plain"
-      {...other}
-      sx={[
-        {
-          width: 36,
-        },
-        ...(Array.isArray(sx) ? sx : [sx]),
-      ]}
-    >
-      <div>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="20"
-          viewBox="0 0 36 32"
-          fill="none"
+    <Dropdown>
+      <MenuButton
+        slots={{ root: IconButton }}
+        slotProps={{ root: { variant: 'plain', color: 'neutral', size: 'sm' } }}
+      >
+        <MoreHorizRoundedIcon />
+      </MenuButton>
+      <Menu size="sm" sx={{ minWidth: 140 }}>
+        <MenuItem>Edit</MenuItem>
+        <MenuItem>Rename</MenuItem>
+        <MenuItem>Move</MenuItem>
+        <Divider />
+        <MenuItem color="danger">Delete</MenuItem>
+      </Menu>
+    </Dropdown>
+  );
+}
+
+export default function OrderList() {
+  return (
+    <Box sx={{ display: { xs: 'block', sm: 'none' } }}>
+      {listItems.map((listItem) => (
+        <List
+          key={listItem.id}
+          size="sm"
+          sx={{
+            '--ListItem-paddingX': 0,
+          }}
         >
-          <path
-            d="M30.343 21.976a1 1 0 00.502-.864l.018-5.787a1 1 0 01.502-.864l3.137-1.802a1 1 0 011.498.867v10.521a1 1 0 01-.502.867l-11.839 6.8a1 1 0 01-.994.001l-9.291-5.314a1 1 0 01-.504-.868v-5.305c0-.006.007-.01.013-.007.005.003.012 0 .012-.007v-.006c0-.004.002-.008.006-.01l7.652-4.396c.007-.004.004-.015-.004-.015a.008.008 0 01-.008-.008l.015-5.201a1 1 0 00-1.5-.87l-5.687 3.277a1 1 0 01-.998 0L6.666 9.7a1 1 0 00-1.499.866v9.4a1 1 0 01-1.496.869l-3.166-1.81a1 1 0 01-.504-.87l.028-16.43A1 1 0 011.527.86l10.845 6.229a1 1 0 00.996 0L24.21.86a1 1 0 011.498.868v16.434a1 1 0 01-.501.867l-5.678 3.27a1 1 0 00.004 1.735l3.132 1.783a1 1 0 00.993-.002l6.685-3.839zM31 7.234a1 1 0 001.514.857l3-1.8A1 1 0 0036 5.434V1.766A1 1 0 0034.486.91l-3 1.8a1 1 0 00-.486.857v3.668z"
-            fill="#007FFF"
-          />
-        </svg>
-      </div>
-    </AspectRatio>
+          <ListItem
+            sx={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'start',
+            }}
+          >
+            <ListItemContent sx={{ display: 'flex', gap: 2, alignItems: 'start' }}>
+              <ListItemDecorator>
+                <Avatar size="sm">{listItem.customer.initial}</Avatar>
+              </ListItemDecorator>
+              <div>
+                <Typography fontWeight={600} gutterBottom>
+                  {listItem.customer.name}
+                </Typography>
+                <Typography level="body-xs" gutterBottom>
+                  {listItem.customer.email}
+                </Typography>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    gap: 0.5,
+                    mb: 1,
+                  }}
+                >
+                  <Typography level="body-xs">{listItem.date}</Typography>
+                  <Typography level="body-xs">&bull;</Typography>
+                  <Typography level="body-xs">{listItem.id}</Typography>
+                </Box>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
+                  <Link level="body-sm" component="button">
+                    Download
+                  </Link>
+                  <RowMenu />
+                </Box>
+              </div>
+            </ListItemContent>
+            <Chip
+              variant="soft"
+              size="sm"
+              startDecorator={
+                {
+                  Paid: <CheckRoundedIcon />,
+                  Refunded: <AutorenewRoundedIcon />,
+                  Cancelled: <BlockIcon />,
+                }[listItem.status]
+              }
+              color={
+                {
+                  Paid: 'success',
+                  Refunded: 'neutral',
+                  Cancelled: 'danger',
+                }[listItem.status] as ColorPaletteProp
+              }
+            >
+              {listItem.status}
+            </Chip>
+          </ListItem>
+          <ListDivider />
+        </List>
+      ))}
+      <Box
+        className="Pagination-mobile"
+        sx={{ display: { xs: 'flex', md: 'none' }, alignItems: 'center', py: 2 }}
+      >
+        <IconButton
+          aria-label="previous page"
+          variant="outlined"
+          color="neutral"
+          size="sm"
+        >
+          <KeyboardArrowLeftIcon />
+        </IconButton>
+        <Typography level="body-sm" mx="auto">
+          Page 1 of 10
+        </Typography>
+        <IconButton
+          aria-label="next page"
+          variant="outlined"
+          color="neutral"
+          size="sm"
+        >
+          <KeyboardArrowRightIcon />
+        </IconButton>
+      </Box>
+    </Box>
   );
 }

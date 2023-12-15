@@ -4,7 +4,6 @@ import App from './App.jsx'
 import Form from './components/Form.jsx'
 import Navbar from './components/Navbar.jsx'
 import Map from './components/Map.jsx'
-import SignIn from './pages/signIn/SignIn.jsx'
 import DataTable from './components/DataTable.jsx'
 import { BrowserRouter, Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom'
 
