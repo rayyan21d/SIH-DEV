@@ -69,7 +69,7 @@ export default function Siding() {
                 Dashboard
               </Link>
               <Typography color="primary" fontWeight={500} fontSize={12}>
-                Orders
+                Siding
               </Typography>
             </Breadcrumbs>
           </Box>
@@ -93,10 +93,16 @@ export default function Siding() {
 
 
 
+            {/*Main Content of the page*/}
+
+
 
 
 
         </Box>
+
+
+
       </Box>
     </CssVarsProvider>
   );

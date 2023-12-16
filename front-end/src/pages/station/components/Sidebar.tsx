@@ -33,7 +33,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import ColorSchemeToggle from "./ColorSchemeToggle";
 import { closeSidebar } from "../utils";
 
-import SignIn from "../../shared/SignIn";
+import SignIn from "./../../shared/SignIn";
 import { Route, useNavigate, Link } from "react-router-dom";
 
 function Toggler({
@@ -186,26 +186,26 @@ export default function Sidebar() {
               )}
             >
               <List sx={{ gap: 0.5 }}>
-                <Link to="/dashboard/current-requests">
+                <Link to="/dashboard/station-history">
                   <ListItem sx={{ mt: 0.5 }}>
                     <ListItemButton role="menuitem">
-                      Current Requests
+                      Station History
                     </ListItemButton>
                   </ListItem>
                 </Link>
 
-                <Link to="/dashboard/make-request">
+                <Link to="/dashboard/trains-in-station">
                   <ListItem sx={{ mt: 0.5 }}>
                     <ListItemButton role="menuitem">
-                      Make Request
+                      Trains in Station
                     </ListItemButton>
                   </ListItem>
                 </Link>
 
-                <Link to="/dashboard/past-requests">
+                <Link to="/dashboard/trains-owned">
                   <ListItem sx={{ mt: 0.5 }}>
                     <ListItemButton role="menuitem">
-                      Past Request
+                      Trains Owned
                     </ListItemButton>
                   </ListItem>
                 </Link>
