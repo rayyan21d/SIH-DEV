@@ -16,32 +16,69 @@ import OrderTable from './components/OrderTable';
 import OrderList from './components/OrderList';
 import Header from './components/Header';
 
-import AddressForm from '../checkout/AddressForm';
+import {AddForm, UpdateForm, DeleteForm} from './BasicForms';
+import MyProfile from './MyProfile';
+
 
 export default function ManageSiding() {
 
   const [showForm, setShowForm] = useState(false);
 
 
+    const [showAddForm, setShowAddForm] = useState(false);
+  const [showUpdateForm, setShowUpdateForm] = useState(false);
+  const [showDeleteForm, setShowDeleteForm] = useState(false);
 
-  function handleSubmit(event){
-
-    
-    setShowForm(!showForm)
-
-    
-
-    // if(event.id=='update'){
-
-    // }
-
-    // if(event.id=='delete'){
-
-
-    // }
-
-
+  function handleAddClick() {
+    setShowForm(false);
+    setShowAddForm(true);
+    setShowUpdateForm(false);
+    setShowDeleteForm(false);
   }
+
+  function handleUpdateClick() {
+     setShowForm(false);
+    setShowAddForm(false);
+    setShowUpdateForm(true);
+    setShowDeleteForm(false);
+  }
+
+  function handleDeleteClick() {
+     setShowForm(false);
+    setShowAddForm(false);
+    setShowUpdateForm(false);
+    setShowDeleteForm(true);
+  }
+
+
+
+
+
+
+
+
+
+//   const [values, setValues] = useState({ firstName: '', lastName: '' });
+
+// function handleChange(event) {
+//   setValues({
+//     ...values,
+//     [event.target.name]: event.target.value
+//   });
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -134,7 +171,7 @@ export default function ManageSiding() {
               color="primary"
               size="sm"
               id='add'
-              onClick={handleSubmit}
+              onClick={handleAddClick}
 
             >
               Add Siding
@@ -144,7 +181,7 @@ export default function ManageSiding() {
               <Button
               color="primary"
               id='update'
-              onClick={handleSubmit}
+              onClick={handleUpdateClick}
 
               size="sm"
 
@@ -156,7 +193,7 @@ export default function ManageSiding() {
               color="primary"
               size="sm"
               id='delete'
-              onClick={handleSubmit}
+              onClick={handleDeleteClick}
 
             >
               Delete Siding
@@ -171,13 +208,28 @@ export default function ManageSiding() {
 
           {/* The main content of the page */}
 
-          {!showForm && <OrderTable />}
+          {showForm && <OrderTable />}
          
-          {showForm && "FORM"}
+          {
+            showAddForm && <AddForm />
+          }
+
+          {
+            showUpdateForm && <UpdateForm />
+          }
+              
+
+          {
+            showDeleteForm && <DeleteForm />
+          }  
+
           
-          
-        
           {/* <OrderList /> */}
+
+          <MyProfile />
+
+
+
 
 
         </Box>
@@ -192,7 +244,8 @@ export default function ManageSiding() {
 
     </CssVarsProvider>
 
-     {showForm && <AddressForm />}
+
+
 
     </>
 

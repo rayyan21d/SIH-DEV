@@ -1,5 +1,5 @@
 import React from 'react';
-import {useLocation, Route, Routes} from 'react-router-dom';
+import {useLocation, Route, Routes, Link} from 'react-router-dom';
 import Admin from './../admin/Admin';
 // import StationDashboard from './Station/StationDashboard';
 // import DestinationDashboard from './Destination/DestinationDashboard';
@@ -67,7 +67,7 @@ function Dashboard() {
         
       );
     default:
-      return <Redirect to="/" />;
+      return <Link to="/" />;
   }
 
 }
