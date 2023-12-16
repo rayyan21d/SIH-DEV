@@ -95,6 +95,11 @@ export default function Admin() {
              Welcome to your Dashboard!
             </Typography>
 
+
+            <Typography level="h3" component="h2">
+             This is where you explain stuff...
+            </Typography>
+
           </Box>
 
 

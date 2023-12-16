@@ -22,10 +22,10 @@ import MyProfile from './MyProfile';
 
 export default function ManageSiding() {
 
-  const [showForm, setShowForm] = useState(false);
 
-
-    const [showAddForm, setShowAddForm] = useState(false);
+  // Conditionally Rendering Forms 
+  const [showForm, setShowForm] = useState(true);
+  const [showAddForm, setShowAddForm] = useState(false);
   const [showUpdateForm, setShowUpdateForm] = useState(false);
   const [showDeleteForm, setShowDeleteForm] = useState(false);
 
@@ -51,6 +51,19 @@ export default function ManageSiding() {
   }
 
 
+  // This means that the component has been entered..
+
+  // Here launch an axios request to fetch data from the DataBase...
+  // const [data, setData] = useState(null);
+  // useEffect(() => {
+  //   axios.get('http://localhost:3000/api/...')
+  //     .then((response) => {
+  //       setData(response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }, []);
 
 
 
@@ -58,14 +71,6 @@ export default function ManageSiding() {
 
 
 
-//   const [values, setValues] = useState({ firstName: '', lastName: '' });
-
-// function handleChange(event) {
-//   setValues({
-//     ...values,
-//     [event.target.name]: event.target.value
-//   });
-// }
 
 
 
@@ -93,6 +98,8 @@ export default function ManageSiding() {
 
         <Header />
         <Sidebar />
+
+       
 
         <Box
           component="main"
@@ -210,9 +217,7 @@ export default function ManageSiding() {
 
           {showForm && <OrderTable />}
          
-          {
-            showAddForm && <MyProfile />
-          }
+          
 
           {
             showUpdateForm && <UpdateForm />
@@ -223,6 +228,10 @@ export default function ManageSiding() {
             showDeleteForm && <DeleteForm />
           }  
 
+
+           {
+            showAddForm && <MyProfile />
+          }
           
           {/* <OrderList /> */}
 

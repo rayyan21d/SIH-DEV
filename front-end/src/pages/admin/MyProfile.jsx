@@ -35,10 +35,14 @@ import FileUpload from './components/FileUpload';
 import CountrySelector from './components/CountrySelector';
 import EditorToolbar from './components/EditorToolbar';
 import Grid from '@mui/material/Grid';
+import { useColorScheme } from '@mui/joy';
 
 export default function MyProfile() {
   return (
-    <Box sx={{ flex: 1, width: '100%' }}>
+
+    <Box sx={{ flex: 1, width: '100%' ,overscrollBehavior:'contain'}}>
+
+      
       <Box
         sx={{
           position: 'sticky',
@@ -47,8 +51,11 @@ export default function MyProfile() {
           zIndex: 9995,
         }}
       >
+
+
         <Box sx={{ px: { xs: 2, md: 6 } }}>
-          <Breadcrumbs
+
+          {/* <Breadcrumbs
             size="sm"
             aria-label="breadcrumbs"
             separator={<ChevronRightRoundedIcon fontSize="sm" />}
@@ -71,15 +78,22 @@ export default function MyProfile() {
             >
               Manage Sidings
             </Link>
+
             <Typography color="primary" fontWeight={500} fontSize={12}>
               Add Siding
             </Typography>
-          </Breadcrumbs>
-          <Typography level="h2" component="h1" sx={{ mt: 1, mb: 2 }}>
+          </Breadcrumbs> */}
+
+          <Typography level="h2" component="h1" sx={{ mt: 1, mb: 2, borderBlock:0.6 }}>
             Add Siding
           </Typography>
         </Box>
+
+
       </Box>
+
+
+
       <Stack
         spacing={4}
         sx={{
@@ -90,6 +104,7 @@ export default function MyProfile() {
           py: { xs: 2, md: 3 },
         }}
       >
+        
         {/* CARDS */}
         <Card>
           {/* Card1 */}
@@ -404,6 +419,12 @@ export default function MyProfile() {
 
 
       </Stack>
+
+
+
+
+
+
     </Box>
   );
 }

@@ -67,87 +67,33 @@ export default function SignIn() {
 
 
     // launch an axios request to http://8000/api/login and get back response and redirect based on the request code
-    const response = await axios.post('http://localhost:8000/api/login', load)
+    
+    // 1- const response = await axios.post('http://localhost:8000/api/login', load)
+    // console.log(response);
 
-    console.log(response);
-    const responseCode= response.status;
-    const responseData = response.data;
+    // const responseCode= response.status;
+    // console.log(responseCode);
 
-    console.log(responseCode, responseData);
+    // 2- Testing route
+    localStorage.setItem('userType', load.userType);
+    navigate('/dashboard', {replace:true,  state: {userType: load.userType} } );
 
-     navigate('/dashboard',  {state: {userType:"admin"} } );
 
+    // // 3 - If response code is okay :
     // if (responseCode.status === 201) {
-      
+
+    //   navigate('/dashboard',  {state: {userType:load.userType} } );
     
-
-
-    // }
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-    // navigate('/dashboard', {replace:true,  state: {userType: load.userType} } );
-    //     try {
-    //   const resp = await fetch("http://localhost:8000/api/login", {
-      
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json"
-    //     },
-    //     body: JSON.stringify(load),
-    //     credentials:'include'
-      
-    //   })
-
-    //     if (!resp.ok) {
-    //     // If the server returns an HTTP status code other than 2xx,
-    //     // handle it based on the status code:
-    //     switch (resp.status) {
-  //       case 400: // Bad Request
-  //         // Handle 400 error
-  //         break;
-  //       case 401: // Unauthorized
-  //         // Handle 401 error
-  //         break;
-  //       // Add more cases as needed
-  //       default:
-  //         // Handle other errors
-    //     }
-    //     return;
-    //   }
-
-    //   const resData = await resp.json()
-    //   console.log(resData)
-
-    //   // Check if a cookie is set
-    //   if (document.cookie) {
-    //     // If a cookie is set, navigate to the dashboard
-    //     navigate('/dashboard');
-    //      // history.push({'/dashboard', state:{usertype: resData.userType}}); }
-    //   } else {
-    //     // If a cookie is not set, handle it
-    //   }
-    // } catch (err) {
-    //   // If the fetch fails (e.g., due to network issues), handle it
-    //   console.log(err);
+    // }else if(responseCode === 404){
+    //   navigate(navigate('/dashboard',  {state: {userType:'error'} } ));
     // }
 
+      
   };
 
   //save this jwt token from reesponse into cookies either using axios or document.cookies....
+
+
 
   return (
     <ThemeProvider theme={defaultTheme}>

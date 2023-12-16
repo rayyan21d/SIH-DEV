@@ -1,8 +1,7 @@
 import React from 'react';
 import {useLocation, Route, Routes, Link} from 'react-router-dom';
 import Admin from './../admin/Admin';
-// import StationDashboard from './Station/StationDashboard';
-// import DestinationDashboard from './Destination/DestinationDashboard';
+import NotFound from './NotFound'
 
 import ManageSiding from '../admin/ManageSiding';
 import ManageStation from '../admin/ManageStation';
@@ -22,10 +21,12 @@ import StationHistory from '../station/StationHistory'
 
 function Dashboard() {
 
+  // // 1- Final way when using DB
   // const location = useLocation();
   // const { userType } = location.state;
   // Save this here permanantly somehow?? A jwt token, ek cookie, and ek variable
 
+  // // 2- Test Route using local Memory
   const userType = localStorage.getItem('userType');
 
 
@@ -66,6 +67,9 @@ function Dashboard() {
         </Routes>
         
       );
+
+    case 'error':
+      return <Link to="/error" element={<NotFound/>} />;
     default:
       return <Link to="/" />;
   }
