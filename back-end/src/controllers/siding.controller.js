@@ -72,7 +72,7 @@ const registerSiding = asyncHandler(async (req, res) => {
             new ApiResponse(200, sidingCreated, "Siding Added Successfully")
         )
     }else {
-        throw new ApiError(401, "Problem While Adding Siding")
+        throw new ApiError(401, "Problem While Adding Siding");
     }
 });
 

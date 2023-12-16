@@ -19,7 +19,14 @@ const stationSchema = new mongoose.Schema({
         trim: true
     },
 
-    trains: [
+    trainsInStation: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Train"
+        }
+    ],
+
+    trainsOwned: [
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Train"
