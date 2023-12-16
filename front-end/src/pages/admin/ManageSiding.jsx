@@ -16,8 +16,9 @@ import OrderTable from './components/OrderTable';
 import OrderList from './components/OrderList';
 import Header from './components/Header';
 
-import {AddForm, UpdateForm, DeleteForm} from './BasicForms';
-import MyProfile from './MyProfile';
+
+import AddSidingForm from './Forms/AddSidingForm';
+import Add from '@mui/icons-material/Add';
 
 
 export default function ManageSiding() {
@@ -176,9 +177,10 @@ export default function ManageSiding() {
            >
              <Button
               color="primary"
-              size="sm"
+              size="md"
               id='add'
               onClick={handleAddClick}
+              startDecorator={<Add />}
 
             >
               Add Siding
@@ -190,7 +192,7 @@ export default function ManageSiding() {
               id='update'
               onClick={handleUpdateClick}
 
-              size="sm"
+              size="md"
 
             >
               Update Siding
@@ -198,7 +200,7 @@ export default function ManageSiding() {
 
               <Button
               color="primary"
-              size="sm"
+              size="md"
               id='delete'
               onClick={handleDeleteClick}
 
@@ -230,7 +232,7 @@ export default function ManageSiding() {
 
 
            {
-            showAddForm && <MyProfile />
+            showAddForm && <AddSidingForm />
           }
           
           {/* <OrderList /> */}

@@ -1,8 +1,8 @@
 
 import{ Route, Routes,} from "react-router-dom"
 
-import SignIn from "./pages/shared/SignIn.jsx"
-import Dashboard from "./pages/shared/Dashboard.jsx"
+import SignIn from "./pages/shared/SignIn"
+import Dashboard from "./pages/shared/Dashboard"
 function App() {
 
   return (
