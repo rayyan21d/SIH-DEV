@@ -211,7 +211,7 @@ export default function ManageSiding() {
           {showForm && <OrderTable />}
          
           {
-            showAddForm && <AddForm />
+            showAddForm && <MyProfile />
           }
 
           {
@@ -226,7 +226,7 @@ export default function ManageSiding() {
           
           {/* <OrderList /> */}
 
-          <MyProfile />
+          
 
 
 
