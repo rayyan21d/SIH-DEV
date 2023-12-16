@@ -20,7 +20,7 @@ import Select from '@mui/material/Select';
 
 import {useNavigate} from 'react-router-dom'
 
-
+import axios from 'axios';
 
 
 function Copyright(props) {
@@ -62,10 +62,44 @@ export default function SignIn() {
     }
     console.log(load);
 
-    localStorage.setItem('userType', load.userType);
+    // localStorage.setItem('userType', load.userType);
     if (!load.username || !load.password) return;
+
+
+    // launch an axios request to http://8000/api/login and get back response and redirect based on the request code
+    const response = await axios.post('http://localhost:8000/api/login', load)
+
+    console.log(response);
+    const responseCode= response.status;
+    const responseData = response.data;
+
+    console.log(responseCode, responseData);
+
+     navigate('/dashboard',  {state: {userType:"admin"} } );
+
+    // if (responseCode.status === 201) {
+      
     
-    navigate('/dashboard', {replace:true,  state: {userType: load.userType} } );
+
+
+    // }
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    // navigate('/dashboard', {replace:true,  state: {userType: load.userType} } );
     //     try {
     //   const resp = await fetch("http://localhost:8000/api/login", {
       
