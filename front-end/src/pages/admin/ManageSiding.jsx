@@ -133,7 +133,7 @@ export default function ManageSiding() {
               <Link
                 underline="none"
                 color="neutral"
-                href="#dashboard"
+                href="/dashboard"
                 aria-label="Home"
               >
                 <HomeRoundedIcon />
@@ -210,6 +210,7 @@ export default function ManageSiding() {
 
            </Box>
 
+           
 
 
 

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {useState} from 'react';
 import { CssVarsProvider } from '@mui/joy/styles';
 import CssBaseline from '@mui/joy/CssBaseline';
 import Box from '@mui/joy/Box';
@@ -16,15 +16,91 @@ import OrderTable from './components/OrderTable';
 import OrderList from './components/OrderList';
 import Header from './components/Header';
 
+
+import AddStationForm from './Forms/AddStationForm';
+import Add from '@mui/icons-material/Add';
+
+
 export default function ManageStation() {
+
+
+  // Conditionally Rendering Forms 
+  const [showForm, setShowForm] = useState(true);
+  const [showAddForm, setShowAddForm] = useState(false);
+  const [showUpdateForm, setShowUpdateForm] = useState(false);
+  const [showDeleteForm, setShowDeleteForm] = useState(false);
+
+  function handleAddClick() {
+    setShowForm(false);
+    setShowAddForm(true);
+    setShowUpdateForm(false);
+    setShowDeleteForm(false);
+  }
+
+  function handleUpdateClick() {
+     setShowForm(false);
+    setShowAddForm(false);
+    setShowUpdateForm(true);
+    setShowDeleteForm(false);
+  }
+
+  function handleDeleteClick() {
+     setShowForm(false);
+    setShowAddForm(false);
+    setShowUpdateForm(false);
+    setShowDeleteForm(true);
+  }
+
+
+  // This means that the component has been entered..
+
+  // Here launch an axios request to fetch data from the DataBase...
+  // const [data, setData] = useState(null);
+  // useEffect(() => {
+  //   axios.get('http://localhost:3000/api/...')
+  //     .then((response) => {
+  //       setData(response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }, []);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   return (
+
+    <>
+
     <CssVarsProvider disableTransitionOnChange>
-      
       <CssBaseline />
       <Box sx={{ display: 'flex', minHeight: '100dvh' }}>
 
         <Header />
         <Sidebar />
+
+       
 
         <Box
           component="main"
@@ -45,6 +121,8 @@ export default function ManageStation() {
             gap: 1,
           }}
         >
+        {/* The upper nav section */}
+        
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <Breadcrumbs
               size="sm"
@@ -55,7 +133,7 @@ export default function ManageStation() {
               <Link
                 underline="none"
                 color="neutral"
-                href="#dashboard"
+                href="/dashboard"
                 aria-label="Home"
               >
                 <HomeRoundedIcon />
@@ -70,11 +148,12 @@ export default function ManageStation() {
                 Dashboard
               </Link>
               <Typography color="primary" fontWeight={500} fontSize={12}>
-                Manage Stations
+                Manage Sidings
               </Typography>
             </Breadcrumbs>
           </Box>
           
+          {/* Manage Siding Heading */}
           <Box
             sx={{
               display: 'flex',
@@ -87,33 +166,100 @@ export default function ManageStation() {
             }}
           >
             <Typography level="h2" component="h1">
-              Manage Stations
+              Manage Sidings
             </Typography>
-            <Button
+
+
+           <Box
+           sx={{display:'flex',
+           justifyContent:'space-between', gap:1
+           }}
+           >
+             <Button
               color="primary"
-              startDecorator={<DownloadRoundedIcon />}
-              size="sm"
+              size="md"
+              id='add'
+              onClick={handleAddClick}
+              startDecorator={<Add />}
+
             >
-              Download PDF
+              Add Siding
             </Button>
+
+
+              <Button
+              color="primary"
+              id='update'
+              onClick={handleUpdateClick}
+
+              size="md"
+
+            >
+              Update Siding
+            </Button>
+
+              <Button
+              color="primary"
+              size="md"
+              id='delete'
+              onClick={handleDeleteClick}
+
+            >
+              Delete Siding
+            </Button>
+
+           </Box>
+
+           
+
+
+
           </Box>
 
-          <OrderTable />
+          {/* The main content of the page */}
+
+          {showForm && <OrderTable />}
+         
+          
+
+          {
+            showUpdateForm && <UpdateForm />
+          }
+              
+
+          {
+            showDeleteForm && <DeleteForm />
+          }  
+
+
+           {
+            showAddForm && <AddStationForm />
+          }
+          
+          {/* <OrderList /> */}
 
           
-          <OrderList />
 
 
 
 
 
         </Box>
+
+          
+
       </Box>
+
+
+      
+
+
     </CssVarsProvider>
 
 
 
 
+    </>
 
 
   );
