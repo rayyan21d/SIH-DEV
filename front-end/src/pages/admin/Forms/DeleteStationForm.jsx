@@ -37,7 +37,7 @@ import Grid from '@mui/material/Grid';
 import { useColorScheme } from '@mui/joy';
 import { useNavigate } from 'react-router-dom';
 
-export default function DeleteSidingForm() {
+export default function DeleteStationForm() {
 
   const navigate = useNavigate();
 
@@ -60,8 +60,8 @@ const handleSubmit = async (event) => {
   // else show error message
 
   const load = {
-    sidingCode: data.get("sidingCode"),
-    sidingName: data.get("sidingName"),
+    stationCode: data.get("stationCode"),
+    stationName: data.get("stationName"),
     zone: data.get("zone"),
     division:data.get("division"),
     contactPerson: data.get("contactPerson"),
@@ -140,6 +140,6 @@ const handleSubmit = async (event) => {
 
   return (
 
-    <h1>Are you sure you want to delete siding ?</h1>
+    <h1>Are you sure you want to delete station?</h1>
   );
 }

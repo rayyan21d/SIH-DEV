@@ -156,7 +156,7 @@ const handleSubmit = async (event) => {
         <Box sx={{ px: { xs: 2, md: 6 } }}>
 
           <Typography level="h2" component="h1" sx={{ mt: 1, mb: 2, borderBlock:0.6 }}>
-            Add Siding
+            Update Siding
           </Typography>
         </Box>
 
@@ -188,7 +188,7 @@ const handleSubmit = async (event) => {
           <Stack
             direction="row"
             spacing={3}
-            sx={{ display: { xs: 'none', md: 'flex' }, my: 1 }}
+            sx={{ display: { xs: 'flex', md: 'flex' }, my: 1 }}
           >
 
             <Stack spacing={2} sx={{ flexGrow: 1 }}>
@@ -225,10 +225,6 @@ const handleSubmit = async (event) => {
             </Stack>
           </Stack>
 
-          
-       
-
-
 
           {/* Card2 */}
           <Divider />
@@ -239,7 +235,7 @@ const handleSubmit = async (event) => {
           <Stack
             direction="row"
             spacing={3}
-            sx={{ display: { xs: 'none', md: 'flex' }, my: 1 }}
+            sx={{ display: { xs: 'flex', md: 'flex' }, my: 1 }}
           >
 
             <Stack spacing={2} sx={{ flexGrow: 1 }}>
@@ -273,7 +269,7 @@ const handleSubmit = async (event) => {
           <Stack
             direction="row"
             spacing={3}
-            sx={{ display: { xs: 'none', md: 'flex' }, my: 1 }}
+            sx={{ display: { xs: 'flex', md: 'flex' }, my: 1 }}
           >
 
             <Stack spacing={2} sx={{ flexGrow: 1 }}>
@@ -302,13 +298,13 @@ const handleSubmit = async (event) => {
           {/* Card4 */}
           <Divider />
           <Box sx={{ mb: 1 }}>
-            <Typography level="title-md">Create Password</Typography>
+            <Typography level="title-md">Enter Password</Typography>
           </Box>
           <Divider />
           <Stack
             direction="row"
             spacing={3}
-            sx={{ display: { xs: 'none', md: 'flex' }, my: 1 }}
+            sx={{ display: { xs: 'flex', md: 'flex' }, my: 1 }}
           >
 
             <Stack spacing={2} sx={{ flexGrow: 1 }}>
@@ -331,7 +327,6 @@ const handleSubmit = async (event) => {
             </Stack>
           </Stack>
          
-
         
 
           {/* SAVE AND CANCEL BUTTONS */}

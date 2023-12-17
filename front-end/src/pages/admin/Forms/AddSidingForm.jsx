@@ -37,7 +37,7 @@ import Grid from '@mui/material/Grid';
 import { useColorScheme } from '@mui/joy';
 import { useNavigate } from 'react-router-dom';
 
-export default function AddForm() {
+export default function AddSidingForm() {
 
   const navigate = useNavigate();
 
@@ -188,7 +188,7 @@ const handleSubmit = async (event) => {
           <Stack
             direction="row"
             spacing={3}
-            sx={{ display: { xs: 'none', md: 'flex' }, my: 1 }}
+            sx={{ display: { xs: 'flex', md: 'flex' }, my: 1 }}
           >
 
             <Stack spacing={2} sx={{ flexGrow: 1 }}>
@@ -239,7 +239,7 @@ const handleSubmit = async (event) => {
           <Stack
             direction="row"
             spacing={3}
-            sx={{ display: { xs: 'none', md: 'flex' }, my: 1 }}
+            sx={{ display: { xs: 'flex', md: 'flex' }, my: 1 }}
           >
 
             <Stack spacing={2} sx={{ flexGrow: 1 }}>
@@ -273,7 +273,7 @@ const handleSubmit = async (event) => {
           <Stack
             direction="row"
             spacing={3}
-            sx={{ display: { xs: 'none', md: 'flex' }, my: 1 }}
+            sx={{ display: { xs: 'flex', md: 'flex' }, my: 1 }}
           >
 
             <Stack spacing={2} sx={{ flexGrow: 1 }}>
@@ -308,7 +308,7 @@ const handleSubmit = async (event) => {
           <Stack
             direction="row"
             spacing={3}
-            sx={{ display: { xs: 'none', md: 'flex' }, my: 1 }}
+            sx={{ display: { xs: 'flex', md: 'flex' }, my: 1 }}
           >
 
             <Stack spacing={2} sx={{ flexGrow: 1 }}>
