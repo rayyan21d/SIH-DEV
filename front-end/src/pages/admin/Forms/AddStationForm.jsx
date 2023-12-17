@@ -37,7 +37,7 @@ import Grid from '@mui/material/Grid';
 import { useColorScheme } from '@mui/joy';
 import { useNavigate } from 'react-router-dom';
 
-export default function AddForm() {
+export default function AddStationForm() {
 
   const navigate = useNavigate();
 
@@ -60,8 +60,8 @@ const handleSubmit = async (event) => {
   // else show error message
 
   const load = {
-    sidingCode: data.get("sidingCode"),
-    sidingName: data.get("sidingName"),
+    stationCode: data.get("stationCode"),
+    stationName: data.get("stationName"),
     zone: data.get("zone"),
     division:data.get("division"),
     contactPerson: data.get("contactPerson"),
@@ -156,7 +156,7 @@ const handleSubmit = async (event) => {
         <Box sx={{ px: { xs: 2, md: 6 } }}>
 
           <Typography level="h2" component="h1" sx={{ mt: 1, mb: 2, borderBlock:0.6 }}>
-            Add Siding
+            Add Station
           </Typography>
         </Box>
 
@@ -182,23 +182,23 @@ const handleSubmit = async (event) => {
         <Card>
           {/* Card1 */}
           <Box sx={{ mb: 1}}>
-            <Typography level="title-md">Siding Details</Typography>
+            <Typography level="title-md">Station Details</Typography>
           </Box>
           <Divider />
           <Stack
             direction="row"
             spacing={3}
-            sx={{ display: { xs: 'none', md: 'flex' }, my: 1 }}
+            sx={{ display: { xs: 'flex', md: 'flex' }, my: 1 }}
           >
 
             <Stack spacing={2} sx={{ flexGrow: 1 }}>
               <Stack spacing={1}>
              
-                <FormLabel>Siding Name</FormLabel>
+                <FormLabel>Station Name</FormLabel>
                 <FormControl required
                   sx={{ display: { sm: 'flex-column', md: 'flex-row' }, gap: 2 }}
                 >
-                  <Input size="sm" placeholder="Siding Name" name="sidingName"/>
+                  <Input size="sm" placeholder="Station Name" name="stationName"/>
                 </FormControl>
 
                 <FormLabel>Zone</FormLabel>
@@ -215,11 +215,11 @@ const handleSubmit = async (event) => {
                   <Input size="sm" placeholder="Divison" name="division"/>
                 </FormControl>
 
-                <FormLabel>Siding Code</FormLabel>
+                <FormLabel>Station Code</FormLabel>
                 <FormControl required
                   sx={{ display: { sm: 'flex-column', md: 'flex-row' }, gap: 2 }}
                 >
-                  <Input size="sm" placeholder="Siding Code" name="sidingCode"/>
+                  <Input size="sm" placeholder="Station Code" name="stationCode"/>
                 </FormControl>
               </Stack>
             </Stack>
@@ -239,17 +239,17 @@ const handleSubmit = async (event) => {
           <Stack
             direction="row"
             spacing={3}
-            sx={{ display: { xs: 'none', md: 'flex' }, my: 1 }}
+            sx={{ display: { xs: 'flex', md: 'flex' }, my: 1 }}
           >
 
             <Stack spacing={2} sx={{ flexGrow: 1 }}>
               <Stack spacing={1}>
             
-                <FormLabel>Siding Manager</FormLabel>
+                <FormLabel>Station Manager</FormLabel>
                 <FormControl required
                   sx={{ display: { sm: 'flex-column', md: 'flex-row' }, gap: 2 }}
                 >
-                  <Input size="sm" placeholder="Siding Manager" name="contactPerson"/>
+                  <Input size="sm" placeholder="Station Manager" name="contactPerson"/>
                 </FormControl>
                 <FormLabel>Contact</FormLabel>
                 <FormControl required
@@ -273,7 +273,7 @@ const handleSubmit = async (event) => {
           <Stack
             direction="row"
             spacing={3}
-            sx={{ display: { xs: 'none', md: 'flex' }, my: 1 }}
+            sx={{ display: { xs: 'flex', md: 'flex' }, my: 1 }}
           >
 
             <Stack spacing={2} sx={{ flexGrow: 1 }}>
@@ -308,7 +308,7 @@ const handleSubmit = async (event) => {
           <Stack
             direction="row"
             spacing={3}
-            sx={{ display: { xs: 'none', md: 'flex' }, my: 1 }}
+            sx={{ display: { xs: 'flex', md: 'flex' }, my: 1 }}
           >
 
             <Stack spacing={2} sx={{ flexGrow: 1 }}>

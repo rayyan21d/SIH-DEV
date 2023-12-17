@@ -19,6 +19,8 @@ import Header from './components/Header';
 
 import AddStationForm from './Forms/AddStationForm';
 import Add from '@mui/icons-material/Add';
+import UpdateStationForm from './Forms/UpdateStationForm';
+import DeleteStationForm from './Forms/DeleteStationForm';
 
 
 export default function ManageStation() {
@@ -148,7 +150,7 @@ export default function ManageStation() {
                 Dashboard
               </Link>
               <Typography color="primary" fontWeight={500} fontSize={12}>
-                Manage Sidings
+                Manage Stations
               </Typography>
             </Breadcrumbs>
           </Box>
@@ -166,7 +168,7 @@ export default function ManageStation() {
             }}
           >
             <Typography level="h2" component="h1">
-              Manage Sidings
+              Manage Stations
             </Typography>
 
 
@@ -183,7 +185,7 @@ export default function ManageStation() {
               startDecorator={<Add />}
 
             >
-              Add Siding
+              Add Station
             </Button>
 
 
@@ -195,7 +197,7 @@ export default function ManageStation() {
               size="md"
 
             >
-              Update Siding
+              Update Station
             </Button>
 
               <Button
@@ -205,7 +207,7 @@ export default function ManageStation() {
               onClick={handleDeleteClick}
 
             >
-              Delete Siding
+              Delete Station
             </Button>
 
            </Box>
@@ -223,12 +225,12 @@ export default function ManageStation() {
           
 
           {
-            showUpdateForm && <UpdateForm />
+            showUpdateForm && <UpdateStationForm />
           }
               
 
           {
-            showDeleteForm && <DeleteForm />
+            showDeleteForm && <DeleteStationForm />
           }  
 
 

@@ -19,6 +19,8 @@ import Header from './components/Header';
 
 import AddSidingForm from './Forms/AddSidingForm';
 import Add from '@mui/icons-material/Add';
+import UpdateSidingForm from './Forms/UpdateSidingForm';
+import DeleteSidingForm from './Forms/DeleteSidingForm';
 
 
 export default function ManageSiding() {
@@ -223,12 +225,12 @@ export default function ManageSiding() {
           
 
           {
-            showUpdateForm && <UpdateForm />
+            showUpdateForm && <UpdateSidingForm />
           }
               
 
           {
-            showDeleteForm && <DeleteForm />
+            showDeleteForm && <DeleteSidingForm />
           }  
 
 
