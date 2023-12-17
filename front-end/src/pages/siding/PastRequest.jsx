@@ -15,25 +15,26 @@ import Sidebar from './components/Sidebar';
 import OrderTable from './components/OrderTable';
 import OrderList from './components/OrderList';
 import Header from './components/Header';
-
+import { useNavigate } from 'react-router-dom';
 import {AddForm, UpdateForm, DeleteForm} from './SidingForms';
 // import MyProfile from './MyProfile';
+import PastRequestDetails from './Forms/PastRequestDetails';
 
 
 export default function PastRequests() {
 
   const [showForm, setShowForm] = useState(false);
-
+  const navigate = useNavigate();
 
     const [showAddForm, setShowAddForm] = useState(false);
   const [showUpdateForm, setShowUpdateForm] = useState(false);
   const [showDeleteForm, setShowDeleteForm] = useState(false);
 
-  function handleAddClick() {
-    setShowForm(false);
-    setShowAddForm(true);
-    setShowUpdateForm(false);
-    setShowDeleteForm(false);
+  function handleViewDetails() {
+    setShowForm(!showForm);
+    // setShowAddForm(true);
+    // setShowUpdateForm(false);
+    // setShowDeleteForm(false);
   }
 
   function handleUpdateClick() {
@@ -84,6 +85,7 @@ export default function PastRequests() {
 
 
   return (
+    
 
     <>
 
@@ -140,7 +142,7 @@ export default function PastRequests() {
                 Dashboard
               </Link>
               <Typography color="primary" fontWeight={500} fontSize={12}>
-                Siding
+                Past Requests
               </Typography>
             </Breadcrumbs>
           </Box>
@@ -162,44 +164,7 @@ export default function PastRequests() {
             </Typography>
 
 
-           <Box
-           sx={{display:'flex',
-           justifyContent:'space-between', gap:1
-           }}
-           >
-             <Button
-              color="primary"
-              size="sm"
-              id='add'
-              onClick={handleAddClick}
-
-            >
-              Make new Request
-            </Button>
-
-
-              <Button
-              color="primary"
-              id='update'
-              onClick={handleUpdateClick}
-
-              size="sm"
-
-            >
-              Update Request
-            </Button>
-
-              <Button
-              color="primary"
-              size="sm"
-              id='delete'
-              onClick={handleDeleteClick}
-
-            >
-              Cencel Request
-            </Button>
-
-           </Box>
+          
 
 
 
@@ -207,10 +172,26 @@ export default function PastRequests() {
           </Box>
 
           {/* The main content of the page */}
+          <h1>Order List Order Table component</h1>
+          <Box
+           sx={{display:'flex',
+           justifyContent:'space-between', gap:1
+           }}
+           >
+            
+             <Button
+              color="primary"
+              size="md"
+              id=''
+              onClick={handleViewDetails}
+            >
+              View Details
+            </Button>
+           </Box>
 
-          {showForm && <OrderTable />}
+          {showForm && < PastRequestDetails/>}
          
-          {
+          {/* {
             showAddForm && <AddForm />
           }
 
@@ -221,7 +202,7 @@ export default function PastRequests() {
 
           {
             showDeleteForm && <DeleteForm />
-          }  
+          }   */}
 
           
           {/* <OrderList /> */}
