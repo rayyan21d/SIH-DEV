@@ -47,7 +47,7 @@ export default function ManageSiding() {
   }
 
   function handleDeleteClick() {
-     setShowForm(false);
+    setShowForm(false);
     setShowAddForm(false);
     setShowUpdateForm(false);
     setShowDeleteForm(true);

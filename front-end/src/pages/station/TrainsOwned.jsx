@@ -16,16 +16,17 @@ import OrderTable from './components/OrderTable';
 import OrderList from './components/OrderList';
 import Header from './components/Header';
 
-import {AddForm, UpdateForm, DeleteForm} from './StationForms';
+// import {AddForm, UpdateForm, DeleteForm} from './StationForms';
 // import MyProfile from './MyProfile';
+import AddTrainForm from './Forms/AddTrainForm';
+import UpdateTrainForm from './Forms/UpdateTrainForm';
+import DeleteTrainForm from './Forms/DeleteTrainForm';
 
 
 export default function TrainsOwned() {
 
-  const [showForm, setShowForm] = useState(false);
-
-
-    const [showAddForm, setShowAddForm] = useState(false);
+  const [showForm, setShowForm] = useState(true);
+  const [showAddForm, setShowAddForm] = useState(false);
   const [showUpdateForm, setShowUpdateForm] = useState(false);
   const [showDeleteForm, setShowDeleteForm] = useState(false);
 
@@ -37,7 +38,7 @@ export default function TrainsOwned() {
   }
 
   function handleUpdateClick() {
-     setShowForm(false);
+    setShowForm(false);
     setShowAddForm(false);
     setShowUpdateForm(true);
     setShowDeleteForm(false);
@@ -140,7 +141,7 @@ export default function TrainsOwned() {
                 Dashboard
               </Link>
               <Typography color="primary" fontWeight={500} fontSize={12}>
-                Station
+                Trains owned
               </Typography>
             </Breadcrumbs>
           </Box>
@@ -174,7 +175,7 @@ export default function TrainsOwned() {
               onClick={handleAddClick}
 
             >
-              Update Button?
+              Add new train
             </Button>
 
 
@@ -186,7 +187,7 @@ export default function TrainsOwned() {
               size="sm"
 
             >
-              Station some
+              Update train details
             </Button>
 
               <Button
@@ -196,7 +197,8 @@ export default function TrainsOwned() {
               onClick={handleDeleteClick}
 
             >
-              Another
+              
+              Remove an existing train
             </Button>
 
            </Box>
@@ -207,20 +209,21 @@ export default function TrainsOwned() {
           </Box>
 
           {/* The main content of the page */}
+          
 
           {showForm && <OrderTable />}
          
           {
-            showAddForm && <AddForm />
+            showAddForm && <AddTrainForm />
           }
 
           {
-            showUpdateForm && <UpdateForm />
+            showUpdateForm && <UpdateTrainForm />
           }
               
 
           {
-            showDeleteForm && <DeleteForm />
+            showDeleteForm && <DeleteTrainForm />
           }  
 
           

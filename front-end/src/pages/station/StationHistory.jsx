@@ -16,13 +16,13 @@ import OrderTable from './components/OrderTable';
 import OrderList from './components/OrderList';
 import Header from './components/Header';
 
-import {AddForm, UpdateForm, DeleteForm} from './StationForms';
+// import {AddForm, UpdateForm, DeleteForm} from './StationForms';
 // import MyProfile from './MyProfile';
 
 
 export default function StationHistory() {
 
-  const [showForm, setShowForm] = useState(false);
+  const [showForm, setShowForm] = useState(true);
 
 
     const [showAddForm, setShowAddForm] = useState(false);
@@ -140,7 +140,7 @@ export default function StationHistory() {
                 Dashboard
               </Link>
               <Typography color="primary" fontWeight={500} fontSize={12}>
-                Station
+                Station History
               </Typography>
             </Breadcrumbs>
           </Box>
@@ -162,44 +162,7 @@ export default function StationHistory() {
             </Typography>
 
 
-           <Box
-           sx={{display:'flex',
-           justifyContent:'space-between', gap:1
-           }}
-           >
-             <Button
-              color="primary"
-              size="sm"
-              id='add'
-              onClick={handleAddClick}
-
-            >
-              Make new Request
-            </Button>
-
-
-              <Button
-              color="primary"
-              id='update'
-              onClick={handleUpdateClick}
-
-              size="sm"
-
-            >
-              Station request?
-            </Button>
-
-              <Button
-              color="primary"
-              size="sm"
-              id='delete'
-              onClick={handleDeleteClick}
-
-            >
-              Another Things
-            </Button>
-
-           </Box>
+           
 
 
 
@@ -210,7 +173,7 @@ export default function StationHistory() {
 
           {showForm && <OrderTable />}
          
-          {
+          {/* {
             showAddForm && <AddForm />
           }
 
@@ -221,7 +184,7 @@ export default function StationHistory() {
 
           {
             showDeleteForm && <DeleteForm />
-          }  
+          }   */}
 
           
           {/* <OrderList /> */}
