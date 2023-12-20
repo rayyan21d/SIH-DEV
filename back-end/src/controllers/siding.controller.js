@@ -6,7 +6,7 @@ import { Order } from "../models/orders.model.js";
 
 const makeRequest = asyncHandler(async (req, res) => {
     const sidingCode = req.user.username;
-    const {stationCode, coalToBeCollected, requestedTime} = req.body;
+    const {stationCode, coalToBeCollected, requestedTime, remarks} = req.body;
     if(
         ([
             sidingCode,
@@ -33,6 +33,7 @@ const makeRequest = asyncHandler(async (req, res) => {
             sidingCode,
             stationCode,
             coalToBeCollected,
+            remarks,
             requestedTime
         }
     )
@@ -65,6 +66,12 @@ const updateRequest = asyncHandler(async (req, res, next) => {
         )
     }
 
+    if(!(req.body.remarks.length === 0)) {
+        for(let i=0; i<req.body.remarks.length; i++) {
+            order.remarks.push(req.body.remarks[i]);
+        }
+        req.body.remarks = order.remarks
+    }
     const updatedOrder = await Order.updateOne({_id: req.params.requestID}, req.body, {new: true});
     if(!(updatedOrder.acknowledged)) {
         res.status(500).json(
