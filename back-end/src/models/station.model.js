@@ -1,10 +1,9 @@
 import mongoose from "mongoose";
-import { Train } from "./train.model.js";
 
 const stationSchema = new mongoose.Schema({
     stationName: {
         type: String,
-        required: true,
+        // required: true,
         lowercase: true,
         index: true,
         trim: true
@@ -19,26 +18,26 @@ const stationSchema = new mongoose.Schema({
         trim: true
     },
 
-    trainsInStation: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Train"
-        }
-    ],
+    // trainsInStation: [
+    //     {
+    //         type: mongoose.Schema.Types.ObjectId,
+    //         ref: "Train"
+    //     }
+    // ],
 
-    trainsOwned: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Train"
-        }
-    ],
+    // trainsOwned: [
+    //     {
+    //         type: mongoose.Schema.Types.ObjectId,
+    //         ref: "Train"
+    //     }
+    // ],
 
     zone: {
         type: String,
         required: true
     },
 
-    division: {
+    district: {
         type: String,
         required: true
     },
@@ -51,15 +50,15 @@ const stationSchema = new mongoose.Schema({
         type: String,
     },
 
-    latitude: {
-        type: String,
-        required: true
-    },
+    // latitude: {
+    //     type: Number,
+    //     required: true
+    // },
 
-    longitude: {
-        type: String,
-        required: true
-    }
+    // longitude: {
+    //     type: Number,
+    //     required: true
+    // }
 
 }, {timestamps: true});
 

@@ -6,7 +6,7 @@ import mongoose from "mongoose";
 const sidingSchema = new mongoose.Schema({
     sidingName: {
         type: String,
-        required: true,
+        // required: true,
         lowercase: true,
         index: true,
         trim: true
@@ -26,7 +26,7 @@ const sidingSchema = new mongoose.Schema({
         required: true
     },
 
-    division: {
+    district: {
         type: String,
         required: true
     },
@@ -40,12 +40,12 @@ const sidingSchema = new mongoose.Schema({
     },
 
     latitude: {
-        type: String,
+        type: Number,
         required: true
     },
 
     longitude: {
-        type: String,
+        type: Number,
         required: true
     }
     

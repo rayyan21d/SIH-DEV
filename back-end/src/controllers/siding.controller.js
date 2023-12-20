@@ -2,78 +2,92 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { ApiError } from "../utils/ApiError.js";
 import { Siding } from "../models/siding.model.js";
-import { User } from "../models/user.model.js";
+import { Order } from "../models/orders.model.js";
 
-
-
-const registerSiding = asyncHandler(async (req, res) => {
-    // get data from user
-    const {sidingCode, sidingName, password, zone, division, contactPersonName, contactPersonContact, latitude, longitude} = req.body;
-    console.log("sidingCode", sidingCode, "sidingName", sidingName, "password", password);
-
-    // Validate if all data is sent
+const makeRequest = asyncHandler(async (req, res) => {
+    const sidingCode = req.user.username;
+    const {stationCode, coalToBeCollected, requestedTime} = req.body;
     if(
-        [
+        ([
             sidingCode,
-            sidingName,
-            password,
-            zone,
-            division,
-            contactPersonName,
-            contactPersonContact,
-            latitude,
-            longitude
+            stationCode,
+            // requestedTime
         ].some((field) => {
-            return field?.trim() === "";
-        })
+            return field.trim() === ""
+        }))
+
+        || (coalToBeCollected === null || coalToBeCollected ===undefined)
     ) {
+        res.status(400).json(
+            new ApiResponse(
+                400,
+                {},
+                "All Fields Not Given"
+            )
+        )
         throw new ApiError(400, "All fields not given");
-    } else {
-        console.log("Got all feilds");
-    }
-    
-    // Check if station already exists
-
-    const existedSiding = await Siding.findOne({ sidingCode });
-    const existedUser = await User.findOne({ username: sidingCode });
-    if(existedSiding) {
-        throw new ApiError(409, "Siding Already exists in Siding Table");
     }
 
-    if(existedUser) {
-        throw new ApiError(409, "Siding Already exists in Siding Table");
-    }
-    // Create entry in DB
-    const sidingCreated = await Siding.create(
+    const orderCreated = await Order.create(
         {
-            sidingCode: sidingCode.toUpperCase(),
-            sidingName: sidingName.toLowerCase(),
-            password,
-            zone,
-            division,
-            contactPersonName,
-            contactPersonContact,
-            latitude,
-            longitude
+            sidingCode,
+            stationCode,
+            coalToBeCollected,
+            requestedTime
         }
     )
 
-    const userCreated = await User.create(
-        {
-            username: sidingCode.toUpperCase(),
-            password,
-            userType: "siding"
-        }
-    )
-    
+    // CHECK IF ORDER IS PLACED OR NOT
 
-    if(await Siding.findById(sidingCreated._id) && await User.findById(userCreated._id)) {
-        return res.status(201).json(
-            new ApiResponse(200, sidingCreated, "Siding Added Successfully")
+    if(await Order.findById(orderCreated._id)) {
+        res.status(201).json(
+            new ApiResponse(200, orderCreated, "Order Placed Successfully")
         )
     }else {
-        throw new ApiError(401, "Problem While Adding Siding");
+        res.status(201).json(
+            new ApiResponse(200, orderCreatedCreated, "Problem while placing order")
+        )
+        throw new ApiError(401, "Problem while placing order");
     }
-});
+})
 
-export { registerSiding };
+
+
+const updateRequest = asyncHandler(async (req, res, next) => {
+    let order = await Order.findById(req.params.requestID);
+    if(!(order)) {
+        res.status(400).json(
+            new ApiResponse(
+                400,
+                {},
+                `No Such Order Found for ${req.user.username}`
+            )
+        )
+    }
+
+    const updatedOrder = await Order.updateOne({_id: req.params.requestID}, req.body, {new: true});
+    if(!(updatedOrder.acknowledged)) {
+        res.status(500).json(
+            new ApiResponse(
+                500,
+                {},
+                `Could not update order due to internal error`
+            )
+        )
+    }
+
+    order = await Order.findById(req.params.requestID);
+    return res.status(200).json(
+        new ApiResponse(
+            200,
+            {
+                order
+            },
+            "Order Updated Successfully"    
+        )
+    )
+})
+
+
+
+export { makeRequest, updateRequest };

@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { Station } from "./station.model.js";
 
 const trainSchema = new mongoose.Schema({
     trainNumber: {
@@ -14,27 +15,34 @@ const trainSchema = new mongoose.Schema({
         type: Number,
     },
 
-    carryingCapicityPerWagon: {
+    carryingCapacity: {
         type: Number,
-        
+        required: true
     },
 
     avgTravellingCost: {
-
+        type: Number,
+        required: true
     },
 
     balanceRemaining: {
-        // how many kms
-        // how many days (only for display)
+        type: Number
     },
 
-    isAssigned: {
-        type: Boolean,
+    status: {
+        type: String,
         default: false,
-        // and to which siding
+    },
+
+    ownedBy: {
+        type: mongoose.Types.ObjectId,
+        ref: "Station"
+    },
+
+    currentlyAt: {
+        type: mongoose.Types.ObjectId,
+        ref: "Station"
     }
-
-
 
 }, {timestamps: true});
 

@@ -10,6 +10,7 @@ import { ApiError } from "../utils/ApiError.js";
 const loginUser = asyncHandler(async (req, res, next) => {
     // Check if user already logged in, if yes redirect to apprpriate page
     // Get Data from request
+    console.log(req.body);
     const { username, password, userType } = req.body;
     // Check if User Exists or not
     const userFound = await User.findOne({ username })
@@ -41,10 +42,11 @@ const loginUser = asyncHandler(async (req, res, next) => {
     // Check if password is Correct or Not
     const passwordCorrect = await userFound.passwordChecker(password);
     if(!passwordCorrect) {
-        res.status(400).json({
-            message: "incorrect password"
-        })
-        return;
+        console.log("Incorrect Password");
+        return res.status(400).json(
+            new ApiResponse(400, {}, "Incorrect Password")
+        )
+        
     }
     console.log("Password is correct");
 
@@ -60,7 +62,8 @@ const loginUser = asyncHandler(async (req, res, next) => {
         new ApiResponse(
             200,
             {
-                user: username 
+                username,
+                userType 
             },
             "User Logged in Successfully"
         )
