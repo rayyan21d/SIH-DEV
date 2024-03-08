@@ -23,4 +23,6 @@ import authRouter from "./routes/auth.routes.js";
 app.use("/api/admin", adminRouter);
 app.use("/api/login", authRouter);
 
+
+
 export { app };

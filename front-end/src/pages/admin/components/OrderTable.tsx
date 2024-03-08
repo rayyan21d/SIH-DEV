@@ -35,18 +35,12 @@ import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import MoreHorizRoundedIcon from "@mui/icons-material/MoreHorizRounded";
 
+import axios from "axios";
+
+import { useState, useEffect } from "react";
+
 const rows = [
   {
-    id: "INV-1234",
-    date: "Feb 3, 2023",
-    status: "Refunded",
-    customer: {
-      initial: "O",
-      name: "Olivia Ryhe",
-      email: "olivia@email.com",
-    },
-  },
-  {
     id: "INV-1233",
     date: "Feb 3, 2023",
     status: "Paid",
@@ -66,157 +60,34 @@ const rows = [
       email: "ciaran.murray@email.com",
     },
   },
-  {
-    id: "INV-1231",
-    date: "Feb 3, 2023",
-    status: "Refunded",
-    customer: {
-      initial: "M",
-      name: "Maria Macdonald",
-      email: "maria.mc@email.com",
-    },
-  },
-  {
-    id: "INV-1230",
-    date: "Feb 3, 2023",
-    status: "Cancelled",
-    customer: {
-      initial: "C",
-      name: "Charles Fulton",
-      email: "fulton@email.com",
-    },
-  },
-  {
-    id: "INV-1229",
-    date: "Feb 3, 2023",
-    status: "Cancelled",
-    customer: {
-      initial: "J",
-      name: "Jay Hooper",
-      email: "hooper@email.com",
-    },
-  },
-  {
-    id: "INV-1228",
-    date: "Feb 3, 2023",
-    status: "Refunded",
-    customer: {
-      initial: "K",
-      name: "Krystal Stevens",
-      email: "k.stevens@email.com",
-    },
-  },
-  {
-    id: "INV-1227",
-    date: "Feb 3, 2023",
-    status: "Paid",
-    customer: {
-      initial: "S",
-      name: "Sachin Flynn",
-      email: "s.flyn@email.com",
-    },
-  },
-  {
-    id: "INV-1226",
-    date: "Feb 3, 2023",
-    status: "Cancelled",
-    customer: {
-      initial: "B",
-      name: "Bradley Rosales",
-      email: "brad123@email.com",
-    },
-  },
-  {
-    id: "INV-1234",
-    date: "Feb 3, 2023",
-    status: "Paid",
-    customer: {
-      initial: "O",
-      name: "Olivia Ryhe",
-      email: "olivia@email.com",
-    },
-  },
+
   {
     id: "INV-1233",
-    date: "Feb 3, 2023",
-    status: "Cancelled",
-    customer: {
-      initial: "S",
-      name: "Steve Hampton",
-      email: "steve.hamp@email.com",
-    },
-  },
-  {
-    id: "INV-1232",
-    date: "Feb 3, 2023",
-    status: "Paid",
+    date: "Feb 3, 202333",
+    status: "Refunded3",
     customer: {
       initial: "C",
       name: "Ciaran Murray",
       email: "ciaran.murray@email.com",
-    },
-  },
-  {
-    id: "INV-1231",
-    date: "Feb 3, 2023",
-    status: "Refunded",
-    customer: {
-      initial: "M",
-      name: "Maria Macdonald",
-      email: "maria.mc@email.com",
-    },
-  },
-  {
-    id: "INV-1230",
-    date: "Feb 3, 2023",
-    status: "Paid",
-    customer: {
-      initial: "C",
-      name: "Charles Fulton",
-      email: "fulton@email.com",
-    },
-  },
-  {
-    id: "INV-1229",
-    date: "Feb 3, 2023",
-    status: "Cancelled",
-    customer: {
-      initial: "J",
-      name: "Jay Hooper",
-      email: "hooper@email.com",
-    },
-  },
-  {
-    id: "INV-1228",
-    date: "Feb 3, 2023",
-    status: "Cancelled",
-    customer: {
-      initial: "K",
-      name: "Krystal Stevens",
-      email: "k.stevens@email.com",
-    },
-  },
-  {
-    id: "INV-1227",
-    date: "Feb 3, 2023",
-    status: "Paid",
-    customer: {
-      initial: "S",
-      name: "Sachin Flynn",
-      email: "s.flyn@email.com",
-    },
-  },
-  {
-    id: "INV-1226",
-    date: "Feb 3, 2023",
-    status: "Cancelled",
-    customer: {
-      initial: "B",
-      name: "Bradley Rosales",
-      email: "brad123@email.com",
     },
   },
 ];
+
+function getData() {
+  const [data, setData] = useState([]);
+
+  const getMoreData = async () => {
+    await axios.get("http://localhost:8000/api/").then((response) => {
+      setData(response.data.data);
+    });
+  };
+
+  useEffect(() => {
+    getMoreData();
+  }, []);
+
+  console.log(data);
+}
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   if (b[orderBy] < a[orderBy]) {
@@ -242,10 +113,6 @@ function getComparator<Key extends keyof any>(
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
 
-// Since 2020 all major browsers ensure sort stability with Array.prototype.sort().
-// stableSort() brings sort stability to non-modern browsers (notably IE11). If you
-// only support modern browsers you can replace stableSort(exampleArray, exampleComparator)
-// with exampleArray.slice().sort(exampleComparator)
 function stableSort<T>(
   array: readonly T[],
   comparator: (a: T, b: T) => number
@@ -285,6 +152,7 @@ export default function OrderTable() {
   const [order, setOrder] = React.useState<Order>("desc");
   const [selected, setSelected] = React.useState<readonly string[]>([]);
   const [open, setOpen] = React.useState(false);
+
   const renderFilters = () => (
     <React.Fragment>
       <FormControl size="sm">
@@ -300,6 +168,7 @@ export default function OrderTable() {
           <Option value="cancelled">Cancelled</Option>
         </Select>
       </FormControl>
+
       <FormControl size="sm">
         <FormLabel>Category</FormLabel>
         <Select size="sm" placeholder="All">
@@ -309,6 +178,7 @@ export default function OrderTable() {
           <Option value="debit">Debit</Option>
         </Select>
       </FormControl>
+
       <FormControl size="sm">
         <FormLabel>Customer</FormLabel>
         <Select size="sm" placeholder="All">
@@ -323,6 +193,7 @@ export default function OrderTable() {
       </FormControl>
     </React.Fragment>
   );
+
   return (
     <React.Fragment>
       <Sheet
@@ -398,7 +269,6 @@ export default function OrderTable() {
           minHeight: 0,
         }}
       >
-        {/**/}
         <Table
           aria-labelledby="tableTitle"
           stickyHeader
